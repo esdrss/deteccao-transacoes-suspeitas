@@ -1,262 +1,226 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detecção de Transações Suspeitas</title>
-    <style>
-        :root {
-            --bg-color: #f3f4f6;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --card-bg: #ffffff;
-            --accent-blue: #3b82f6;
-            --accent-red: #ef4444;
-            --border-color: #e5e7eb;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise de Transações</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: rgb(0, 51, 54);
-            color: var(--text-main);
-            padding: 2rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            max-width: 1100px;
-            width: 100%;
-        }
-
-        header {
-            margin-bottom: 2rem;
-        }
-
-        header h1 {
-            font-size: 1.8rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        header p {
-            color: white;
-            font-size: 0.95rem;
-            text-align: center;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .stat-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            border: 1px solid var(--border-color);
-            transition: transform 0.2s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .stat-card h3 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card .value {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-
-        .stat-card.alert .value {
-            color: var(--accent-red);
-        }
-
-        .stat-card .unit {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .table-container {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-
-        .table-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            background-color: #f9fafb;
-        }
-
-        .table-header h2 {
-            font-size: 1.2rem;
-            color: var(--text-main);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th,
-        td {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background-color: #f9fafb;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        tbody tr:hover {
-            background-color: #f3f4f6;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .status-badge {
-            background-color: #fee2e2;
-            color: #991b1b;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            th,
-            td {
-                padding: 0.75rem 1rem;
-            }
-        }
-    </style>
+<style>
+body{
+    background:#003336;
+    font-family: Arial, Helvetica, sans-serif;
+    padding:40px;
+    color:white;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+h1{text-align:center;}
+.actions{
+    text-align:center;
+    margin:20px 0;
+}
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.btn{
+    background:#0f766e;
+    color:white;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+.card{
+    background:white;
+    color:#1f2937;
+    padding:20px;
+    border-radius:12px;
+}
+.card h3{
+    font-size:14px;
+    margin-bottom:8px;
+}
+.card .value{
+    font-size:22px;
+    font-weight:bold;
+}
+.alert{
+    color:#dc2626;
+}
+.table-box{
+    margin-top:40px;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    color:#1f2937;
+}
+th{
+    background:#f3f4f6;
+    font-size:12px;
+    text-transform:uppercase;
+}
+.status{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:4px 8px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:bold;
+}
+.erro{
+    background:#7f1d1d;
+    padding:10px;
+    margin-top:20px;
+    border-radius:8px;
+    display:none;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Análise de Transações</h1>
-            <p>Monitoramento estatístico com base no desvio padrão (Regra dos 3 Sigma).</p>
-        </header>
+<div class="container">
 
-        <section class="stats-grid">
-            <div class="stat-card">
-                <h3>Média</h3>
-                <div class="value"><span class="unit">R$</span> 1.250,00</div>
-            </div>
+<h1>Análise de Transações</h1>
+<p style="text-align:center;">Regra dos 3 Sigma</p>
 
-            <div class="stat-card">
-                <h3>Desvio Padrão</h3>
-                <div class="value"><span class="unit">R$</span> 315,50</div>
-            </div>
+<div class="actions">
+<input type="file" id="arquivo" accept=".xlsx,.xls,.csv">
+<button class="btn" id="btnEnviar">Analisar planilha</button>
+</div>
 
-            <div class="stat-card">
-                <h3>Limite (Média + 3σ)</h3>
-                <div class="value"><span class="unit">R$</span> 2.196,50</div>
-            </div>
+<div class="erro" id="erroBox"></div>
 
-            <div class="stat-card alert">
-                <h3>Qtd. Suspeitas</h3>
-                <div class="value">4</div>
-            </div>
-        </section>
+<div class="cards">
+<div class="card">
+<h3>MÉDIA</h3>
+<div class="value">R$ <span id="media">--</span></div>
+</div>
 
-        <section class="table-container">
-            <div class="table-header">
-                <h2>Transações Sinalizadas</h2>
-            </div>
-            <div style="overflow-x:auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID Transação</th>
-                            <th>Data</th>
-                            <th>Cliente</th>
-                            <th>Valor</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#TRX-8901</td>
-                            <td>24/02/2026</td>
-                            <td>Cliente A</td>
-                            <td>R$ 2.500,00</td>
-                            <td><span class="status-badge">Suspeita</span></td>
-                        </tr>
-                        <tr>
-                            <td>#TRX-8942</td>
-                            <td>24/02/2026</td>
-                            <td>Cliente B</td>
-                            <td>R$ 3.100,50</td>
-                            <td><span class="status-badge">Suspeita</span></td>
-                        </tr>
-                        <tr>
-                            <td>#TRX-9015</td>
-                            <td>24/02/2026</td>
-                            <td>Cliente C</td>
-                            <td>R$ 4.250,00</td>
-                            <td><span class="status-badge">Suspeita</span></td>
-                        </tr>
-                        <tr>
-                            <td>#TRX-9102</td>
-                            <td>24/02/2026</td>
-                            <td>Cliente D</td>
-                            <td>R$ 2.200,00</td>
-                            <td><span class="status-badge">Suspeita</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </div>
+<div class="card">
+<h3>DESVIO PADRÃO</h3>
+<div class="value">R$ <span id="desvio">--</span></div>
+</div>
+
+<div class="card">
+<h3>LIMITE (MÉDIA + 3σ)</h3>
+<div class="value">R$ <span id="limite">--</span></div>
+</div>
+
+<div class="card">
+<h3>QTD. SUSPEITAS</h3>
+<div class="value alert"><span id="qtd">--</span></div>
+</div>
+</div>
+
+<div class="table-box">
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Data</th>
+<th>Cliente</th>
+<th>Valor</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+
+</div>
+
+<script>
+const API_URL = "http://127.0.0.1:8000/analisar";
+
+function formatarNumero(v){
+    return Number(v).toLocaleString("pt-BR", {minimumFractionDigits:2});
+}
+function formatarDinheiro(v){
+    return Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+
+async function enviarArquivo(){
+    const input = document.getElementById("arquivo");
+    const erroBox = document.getElementById("erroBox");
+    erroBox.style.display="none";
+
+    if(!input.files.length){
+        alert("Escolha uma planilha.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("arquivo", input.files[0]);
+
+    try{
+        const response = await fetch(API_URL,{
+            method:"POST",
+            body:formData
+        });
+
+        const dados = await response.json();
+
+        if(dados.erro){
+            erroBox.innerText=dados.erro;
+            erroBox.style.display="block";
+            return;
+        }
+
+        document.getElementById("media").textContent = formatarNumero(dados.media);
+        document.getElementById("desvio").textContent = formatarNumero(dados.desvio_padrao);
+        document.getElementById("limite").textContent = formatarNumero(dados.limite);
+        document.getElementById("qtd").textContent = dados.quantidade_suspeitas;
+
+        const tbody = document.getElementById("tbody");
+        tbody.innerHTML="";
+
+        if(dados.suspeitas.length===0){
+            tbody.innerHTML="<tr><td colspan='5'>Nenhuma suspeita encontrada.</td></tr>";
+            return;
+        }
+
+        dados.suspeitas.forEach((t,i)=>{
+            const id = t.id || t.ID || `TRX-${9000+i}`;
+            const data = t.data || "--";
+            const cliente = t.cliente || "--";
+            const valor = t.valor || 0;
+
+            const tr = document.createElement("tr");
+            tr.innerHTML=`
+                <td>${id}</td>
+                <td>${data}</td>
+                <td>${cliente}</td>
+                <td>${formatarDinheiro(valor)}</td>
+                <td><span class="status">Suspeita</span></td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+    }catch(error){
+        erroBox.innerText="Erro ao conectar com a API. Certifique-se que o Python está rodando.";
+        erroBox.style.display="block";
+    }
+}
+
+document.getElementById("btnEnviar").addEventListener("click", enviarArquivo);
+</script>
 
 </body>
-
 </html>
