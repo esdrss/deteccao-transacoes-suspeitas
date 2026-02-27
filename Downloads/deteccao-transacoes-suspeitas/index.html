@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detecção de Transações Suspeitas</title>
+
+  <style>
+    body {
+      background: #003336;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 32px;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 0 0 6px;
+    }
+
+    .sub {
+      text-align: center;
+      opacity: .9;
+      margin: 0 0 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: .3px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input,
+    select {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.15);
+      color: white;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    label {
+      font-size: 12px;
+      opacity: .9;
+      display: block;
+      margin: 8px 0 6px;
+    }
+
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: #0f766e;
+      color: white;
+    }
+
+    .btn2 {
+      background: #111827;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .danger {
+      background: #b91c1c;
+      color: white;
+    }
+
+    .muted {
+      opacity: .85;
+      font-size: 12px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: white;
+      color: #1f2937;
+      padding: 16px;
+      border-radius: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    .card .value {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .alert {
+      color: #b91c1c;
+    }
+
+    .table-box {
+      margin-top: 16px;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+      color: #1f2937;
+      font-size: 13px;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .pill-ok {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .pill-warn {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .pill-info {
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .error {
+      background: #7f1d1d;
+      padding: 10px;
+      border-radius: 10px;
+      display: none;
+      margin-top: 12px;
+    }
+
+    .success {
+      background: #064e3b;
+      padding: 10px;
+      border-radius: 10px;
+      display: none;
+      margin-top: 12px;
+    }
+
+    a {
+      color: #a7f3d0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Detecção de Transações Suspeitas</h1>
+    <p class="sub">CRUD de datasets + métodos estatísticos (Sigma, Z-score, IQR, MAD)</p>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>1) Upload (Create)</h2>
+        <div class="row">
+          <div style="flex:1; min-width:220px;">
+            <label>Nome do dataset (opcional)</label>
+            <input id="dsName" type="text" placeholder="Ex.: Semana 02 - Pagamentos" style="width:100%;" />
+          </div>
+          <div style="flex:1; min-width:260px;">
+            <label>Arquivo (.csv, .xlsx, .xls)</label>
+            <input id="dsFile" type="file" accept=".csv,.xlsx,.xls" style="width:100%;" />
+          </div>
+          <div style="min-width:170px; margin-top:18px;">
+            <button class="btn" id="btnUpload">Salvar dataset</button>
+          </div>
+        </div>
+        <div class="muted" style="margin-top:10px;">Dica: a coluna analisada padrão é <b>valor</b> (configurável
+          abaixo).</div>
+        <div class="error" id="errBox"></div>
+        <div class="success" id="okBox"></div>
+      </div>
+
+      <div class="panel">
+        <h2>2) Configuração da Análise</h2>
+        <div class="row">
+          <div>
+            <label>Método</label>
+            <select id="method">
+              <option value="sigma">Sigma (média ± k·desvio)</option>
+              <option value="zscore">Z-score (|z| > k)</option>
+              <option value="iqr">IQR (Q1/Q3 ± k·IQR)</option>
+              <option value="mad">MAD (mediana ± k·MAD)</option>
+            </select>
+          </div>
+          <div>
+            <label>k</label>
+            <input id="k" type="number" step="0.1" value="3" style="width:110px;" />
+          </div>
+          <div>
+            <label>Direção</label>
+            <select id="direction">
+              <option value="upper">Somente acima</option>
+              <option value="lower">Somente abaixo</option>
+              <option value="both">Ambos</option>
+            </select>
+          </div>
+          <div>
+            <label>Coluna</label>
+            <input id="column" type="text" value="valor" style="width:150px;" />
+          </div>
+          <div>
+            <label>Streaming (CSV)</label>
+            <select id="streaming">
+              <option value="false">Não</option>
+              <option value="true">Sim (média/desvio)</option>
+            </select>
+          </div>
+          <div>
+            <label>Máx. suspeitas</label>
+            <input id="maxSus" type="number" value="500" min="1" max="5000" style="width:120px;" />
+          </div>
+        </div>
+        <div class="muted" style="margin-top:10px;">
+          Streaming é útil para CSV muito grande, mas só se aplica em Sigma/Z-score.
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;">
+      <h2>3) Datasets (Read / Update / Delete)</h2>
+      <div class="row" style="justify-content:space-between;">
+        <div class="muted">Clique em <b>Analisar</b> para rodar a detecção no dataset.</div>
+        <button class="btn2" id="btnRefresh">Atualizar lista</button>
+      </div>
+
+      <div class="table-box" style="margin-top:12px;">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Arquivo</th>
+              <th>Tamanho</th>
+              <th>Upload</th>
+              <th>Última análise</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="dsTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;">
+      <h2>4) Resultado da Análise</h2>
+      <div class="muted" id="resultHint">Selecione <b>Analisar</b> em algum dataset.</div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Método</h3>
+          <div class="value" id="rMethod">--</div>
+        </div>
+        <div class="card">
+          <h3>Estatísticas</h3>
+          <div class="value" id="rStats">--</div>
+        </div>
+        <div class="card">
+          <h3>Limites</h3>
+          <div class="value" id="rThresh">--</div>
+        </div>
+        <div class="card">
+          <h3>Suspeitas</h3>
+          <div class="value alert"><span id="rCount">--</span></div>
+        </div>
+      </div>
+
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr id="susHead"></tr>
+          </thead>
+          <tbody id="susBody"></tbody>
+        </table>
+      </div>
+      <div class="muted" id="truncMsg" style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function showErr(msg) {
+      const box = $('errBox');
+      box.style.display = 'block';
+      box.textContent = msg;
+      $('okBox').style.display = 'none';
+    }
+    function showOk(msg) {
+      const box = $('okBox');
+      box.style.display = 'block';
+      box.textContent = msg;
+      $('errBox').style.display = 'none';
+    }
+    function clearMsg() {
+      $('errBox').style.display = 'none';
+      $('okBox').style.display = 'none';
+    }
+    function fmtBytes(bytes) {
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      if (!bytes && bytes !== 0) return '--';
+      let i = 0; let v = bytes;
+      while (v >= 1024 && i < sizes.length - 1) { v /= 1024; i++; }
+      return v.toFixed(1) + ' ' + sizes[i];
+    }
+    function pill(html, cls) {
+      return `<span class="pill ${cls}">${html}</span>`;
+    }
+    function getAnalyzeConfig() {
+      return {
+        method: $('method').value,
+        k: Number($('k').value),
+        direction: $('direction').value,
+        column: $('column').value.trim() || 'valor',
+        streaming: $('streaming').value === 'true',
+        max_suspeitas: Number($('maxSus').value)
+      };
+    }
+
+    async function apiJson(url, opts = {}) {
+      const res = await fetch(url, opts);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = data.detail || data.erro || ('Erro HTTP ' + res.status);
+        throw new Error(msg);
+      }
+      return data;
+    }
+
+    async function refreshDatasets() {
+      const tbody = $('dsTbody');
+      tbody.innerHTML = `<tr><td colspan="7">Carregando...</td></tr>`;
+      const list = await apiJson('/datasets');
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7">Nenhum dataset salvo ainda.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = '';
+      for (const ds of list) {
+        const last = ds.last_analysis_at
+          ? pill(`${ds.last_analysis_method || '--'} · ${ds.last_suspeitas_count ?? '--'} suspeitas`, (ds.last_suspeitas_count || 0) > 0 ? 'pill-warn' : 'pill-ok')
+          : pill('sem análise', 'pill-info');
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><code>${ds.id}</code></td>
+          <td>${escapeHtml(ds.name)}</td>
+          <td>${escapeHtml(ds.original_filename)}</td>
+          <td>${fmtBytes(ds.size_bytes)}</td>
+          <td>${escapeHtml(new Date(ds.uploaded_at).toLocaleString('pt-BR'))}</td>
+          <td>${last}</td>
+          <td>
+            <button class="btn" data-act="analyze" data-id="${ds.id}">Analisar</button>
+            <button class="btn2" data-act="view" data-id="${ds.id}">Ver último</button>
+            <button class="btn2" data-act="rename" data-id="${ds.id}">Renomear</button>
+            <button class="btn2" data-act="replace" data-id="${ds.id}">Substituir</button>
+            <button class="danger" data-act="delete" data-id="${ds.id}">Excluir</button>
+            <input type="file" accept=".csv,.xlsx,.xls" style="display:none" data-file="${ds.id}" />
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function renderResult(result) {
+      $('resultHint').textContent = `Análise em ${new Date(result.analysis_at).toLocaleString('pt-BR')} · coluna: ${result.column}`;
+
+      $('rMethod').textContent = result.method.toUpperCase();
+      $('rCount').textContent = result.quantidade_suspeitas;
+
+      const statsPairs = Object.entries(result.stats || {}).map(([k, v]) => `${k}=${v}`).join(' · ');
+      $('rStats').textContent = statsPairs || '--';
+
+      const th = result.thresholds || {};
+      $('rThresh').textContent = `lower=${th.lower ?? '--'} · upper=${th.upper ?? '--'}`;
+
+      // tabela dinâmica
+      const head = $('susHead');
+      const body = $('susBody');
+      head.innerHTML = '';
+      body.innerHTML = '';
+
+      const rows = result.suspeitas || [];
+      if (rows.length === 0) {
+        head.innerHTML = '<th>Resultado</th>';
+        body.innerHTML = `<tr><td>Nenhuma suspeita encontrada.</td></tr>`;
+      } else {
+        const cols = Object.keys(rows[0]);
+        for (const c of cols) {
+          const thEl = document.createElement('th');
+          thEl.textContent = c;
+          head.appendChild(thEl);
+        }
+        for (const r of rows) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = cols.map(c => `<td>${escapeHtml(r[c])}</td>`).join('');
+          body.appendChild(tr);
+        }
+      }
+
+      $('truncMsg').textContent = result.truncated
+        ? `⚠️ A lista de suspeitas foi limitada a ${$('maxSus').value}. Total real: ${result.quantidade_suspeitas}.`
+        : '';
+    }
+
+    async function handleUpload() {
+      clearMsg();
+      const file = $('dsFile').files[0];
+      if (!file) { showErr('Escolha um arquivo.'); return; }
+
+      const fd = new FormData();
+      fd.append('arquivo', file);
+      const name = $('dsName').value.trim();
+      if (name) fd.append('name', name);
+
+      try {
+        const ds = await apiJson('/datasets', { method: 'POST', body: fd });
+        showOk(`Dataset salvo: ${ds.id}`);
+        $('dsName').value = '';
+        $('dsFile').value = '';
+        await refreshDatasets();
+      } catch (e) {
+        showErr(e.message);
+      }
+    }
+
+    async function analyze(id) {
+      const cfg = getAnalyzeConfig();
+      try {
+        const result = await apiJson(`/datasets/${id}/analyze`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cfg)
+        });
+        renderResult(result);
+        await refreshDatasets();
+      } catch (e) {
+        showErr(e.message);
+      }
+    }
+
+    async function viewLast(id) {
+      try {
+        const result = await apiJson(`/datasets/${id}/result`);
+        renderResult(result);
+      } catch (e) {
+        showErr(e.message);
+      }
+    }
+
+    async function renameDataset(id) {
+      const newName = prompt('Novo nome do dataset:');
+      if (!newName) return;
+      try {
+        const fd = new FormData();
+        fd.append('name', newName);
+        await apiJson(`/datasets/${id}`, { method: 'PUT', body: fd });
+        await refreshDatasets();
+      } catch (e) {
+        showErr(e.message);
+      }
+    }
+
+    async function replaceFile(id) {
+      const input = document.querySelector(`input[data-file="${id}"]`);
+      input.click();
+      input.onchange = async () => {
+        const file = input.files[0];
+        if (!file) return;
+        try {
+          const fd = new FormData();
+          fd.append('arquivo', file);
+          await apiJson(`/datasets/${id}`, { method: 'PUT', body: fd });
+          await refreshDatasets();
+          showOk('Arquivo substituído. (Resultado anterior foi limpo)');
+        } catch (e) {
+          showErr(e.message);
+        } finally {
+          input.value = '';
+        }
+      };
+    }
+
+    async function deleteDataset(id) {
+      if (!confirm(`Excluir dataset ${id}?`)) return;
+      try {
+        await apiJson(`/datasets/${id}`, { method: 'DELETE' });
+        await refreshDatasets();
+      } catch (e) {
+        showErr(e.message);
+      }
+    }
+
+    // events
+    $('btnUpload').addEventListener('click', handleUpload);
+    $('btnRefresh').addEventListener('click', () => refreshDatasets().catch(e => showErr(e.message)));
+
+    // defaults por método
+    $('method').addEventListener('change', () => {
+      const m = $('method').value;
+      const defaults = { sigma: 3, zscore: 3, iqr: 1.5, mad: 3.5 };
+      $('k').value = defaults[m] ?? 3;
+    });
+
+    $('dsTbody').addEventListener('click', (ev) => {
+      const btn = ev.target.closest('button');
+      if (!btn) return;
+      const act = btn.getAttribute('data-act');
+      const id = btn.getAttribute('data-id');
+      if (!act || !id) return;
+
+      if (act === 'analyze') analyze(id);
+      if (act === 'view') viewLast(id);
+      if (act === 'rename') renameDataset(id);
+      if (act === 'replace') replaceFile(id);
+      if (act === 'delete') deleteDataset(id);
+    });
+
+    // init
+    refreshDatasets().catch(e => showErr(e.message));
+  </script>
+</body>
+
+</html>
