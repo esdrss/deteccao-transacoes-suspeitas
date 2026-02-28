@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import json
 import math
 import time
 from datetime import datetime, timezone
@@ -57,6 +58,25 @@ class AnalyzeRequest(BaseModel):
     max_suspeitas: int = Field(default=500, ge=1, le=5000)
 
 
+def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
+    # Padroniza nomes de colunas para evitar bugs do Excel (espaços, maiúsculas etc.)
+    df.columns = df.columns.astype(str).str.strip().str.lower()
+    return df
+
+
+def _coerce_ptbr_numeric(series: pd.Series) -> pd.Series:
+    # Converte números em formato brasileiro (ex: "R$ 1.234,56") para float
+    s = series
+    if s.dtype == "object":
+        s = (
+            s.astype(str)
+             .str.replace("R$", "", regex=False)
+             .str.replace(" ", "", regex=False)
+             .str.replace(".", "", regex=False)   # remove milhar
+             .str.replace(",", ".", regex=False)  # troca decimal
+        )
+    return pd.to_numeric(s, errors="coerce")
+
 def _read_dataframe_from_bytes(filename: str, content: bytes) -> pd.DataFrame:
     name = (filename or "").lower()
     if name.endswith(".csv"):
@@ -93,14 +113,16 @@ def _mean_std_streaming_csv(path: Path, column: str, chunksize: int = 200_000) -
 
     OBS: só funciona para métodos baseados em média/desvio (sigma/zscore).
     """
+    column = (column or "").strip().lower()
     n = 0
     mean = 0.0
     m2 = 0.0
 
     for chunk in pd.read_csv(path, chunksize=chunksize):
+        _normalize_columns(chunk)
         if column not in chunk.columns:
             raise ValueError(f"A planilha precisa ter uma coluna chamada '{column}'.")
-        vals = pd.to_numeric(chunk[column], errors="coerce").dropna().tolist()
+        vals = _coerce_ptbr_numeric(chunk[column]).dropna().tolist()
         for x in vals:
             n += 1
             delta = x - mean
@@ -130,10 +152,13 @@ def _threshold_mask(values: pd.Series, lower: Optional[float], upper: Optional[f
 def _analyze_df(df: pd.DataFrame, req: AnalyzeRequest) -> Dict[str, Any]:
     t0 = time.perf_counter()
 
-    col = req.column
+    # Higieniza as colunas do dataframe logo no início
+    _normalize_columns(df)
+
+    col = (req.column or "").strip().lower()
     series = _coerce_numeric_series(df, col)
     if len(series) < 2:
-        raise ValueError("Poucos dados na coluna 'valor' para calcular estatísticas.")
+        raise ValueError(f"Poucos dados na coluna '{col}' para calcular estatísticas.")
 
     method = req.method
     direction = req.direction
@@ -221,7 +246,7 @@ def _analyze_df(df: pd.DataFrame, req: AnalyzeRequest) -> Dict[str, Any]:
     # Aplicar máscara no DF original (apenas nas linhas onde 'col' é numérico)
     # Para isso, recriamos a coluna numérica no DF e filtramos
     df2 = df.copy()
-    df2[col] = pd.to_numeric(df2[col], errors="coerce")
+    df2[col] = _coerce_ptbr_numeric(df2[col])
     df2 = df2.dropna(subset=[col])
     # `mask` tem o mesmo índice de `df2` (após dropna), então podemos alinhar por índice.
     suspeitas_df = df2.loc[mask]
@@ -249,7 +274,7 @@ def _analyze_df(df: pd.DataFrame, req: AnalyzeRequest) -> Dict[str, Any]:
         "stats": stats,
         "thresholds": thresholds,
         "quantidade_suspeitas": total_suspeitas,
-        "suspeitas": suspeitas_df.to_dict(orient="records"),
+        "suspeitas": json.loads(suspeitas_df.to_json(orient="records", date_format="iso")),
         "truncated": truncated,
         "analysis_ms": dt_ms,
         "analysis_at": utc_now_iso(),
@@ -264,7 +289,8 @@ def _analyze_path(path: Path, req: AnalyzeRequest) -> Dict[str, Any]:
     """
     if req.streaming and path.suffix.lower() == ".csv" and req.method in {"sigma", "zscore"}:
         # 1) calcula mean/std em streaming
-        n, mean, std = _mean_std_streaming_csv(path, req.column)
+        col = (req.column or "").strip().lower()
+        n, mean, std = _mean_std_streaming_csv(path, col)
 
         if std == 0.0:
             thresholds = {"lower": None, "upper": None}
@@ -284,19 +310,20 @@ def _analyze_path(path: Path, req: AnalyzeRequest) -> Dict[str, Any]:
         total_sus = 0
         chunksize = 200_000
         for chunk in pd.read_csv(path, chunksize=chunksize):
-            if req.column not in chunk.columns:
-                raise ValueError(f"A planilha precisa ter uma coluna chamada '{req.column}'.")
-            chunk[req.column] = pd.to_numeric(chunk[req.column], errors="coerce")
-            chunk = chunk.dropna(subset=[req.column])
-            mask = _threshold_mask(chunk[req.column], thresholds.get("lower"), thresholds.get("upper"))
+            _normalize_columns(chunk)
+            if col not in chunk.columns:
+                raise ValueError(f"A planilha precisa ter uma coluna chamada '{col}'.")
+            chunk[col] = _coerce_ptbr_numeric(chunk[col])
+            chunk = chunk.dropna(subset=[col])
+            mask = _threshold_mask(chunk[col], thresholds.get("lower"), thresholds.get("upper"))
             sus_chunk = chunk.loc[mask]
             if len(sus_chunk) == 0:
                 continue
             total_sus += int(len(sus_chunk))
             if len(suspeitas) < req.max_suspeitas:
                 take = req.max_suspeitas - len(suspeitas)
-                suspeitas.extend(sus_chunk.head(take).to_dict(orient="records"))
-
+                sus_chunk_json = json.loads(sus_chunk.head(take).to_json(orient="records", date_format="iso")) # <--- NOVA LINHA
+                suspeitas.extend(sus_chunk_json)
         truncated = total_sus > req.max_suspeitas
 
         def r2(x: Optional[float]) -> Optional[float]:
@@ -305,7 +332,7 @@ def _analyze_path(path: Path, req: AnalyzeRequest) -> Dict[str, Any]:
         out = {
             "method": req.method,
             "direction": req.direction,
-            "column": req.column,
+            "column": col,
             "stats": {"mean": r2(mean), "std": r2(std)},
             "thresholds": {"lower": r2(thresholds.get("lower")), "upper": r2(thresholds.get("upper"))},
             "quantidade_suspeitas": int(total_sus),

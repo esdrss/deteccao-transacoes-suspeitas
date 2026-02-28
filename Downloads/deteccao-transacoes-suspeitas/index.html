@@ -7,116 +7,333 @@
   <title>Detecção de Transações Suspeitas</title>
 
   <style>
+    :root {
+      /* Paleta (sensação: tech + confiável + “calmo”) */
+      --bg-0: #062a2c;
+      --bg-1: #041f21;
+      --panel: rgba(255, 255, 255, 0.07);
+      --panel-border: rgba(255, 255, 255, 0.12);
+
+      --text: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.72);
+
+      --brand: #14b8a6;
+      --brand-2: #0f766e;
+
+      --danger: #ef4444;
+      --danger-2: #b91c1c;
+
+      --card: #ffffff;
+      --card-text: #111827;
+
+      --line: #e5e7eb;
+
+      --radius: 16px;
+      --radius-sm: 12px;
+
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+      --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #003336;
-      font-family: Arial, Helvetica, sans-serif;
-      padding: 32px;
-      color: white;
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(20, 184, 166, 0.30), transparent 55%),
+        radial-gradient(900px 500px at 110% 0%, rgba(99, 102, 241, 0.14), transparent 55%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
     }
 
     .container {
-      max-width: 1200px;
-      margin: auto;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 28px 18px 42px;
     }
 
-    h1 {
-      text-align: center;
-      margin: 0 0 6px;
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
     }
 
-    .sub {
-      text-align: center;
-      opacity: .9;
-      margin: 0 0 24px;
+    .title {
+      margin: 0;
+      font-size: clamp(20px, 2.2vw, 28px);
+      letter-spacing: 0.2px;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.15);
     }
 
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 16px;
     }
 
     @media (max-width: 980px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .grid {
         grid-template-columns: 1fr;
       }
     }
 
     .panel {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 14px;
-      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(8px);
     }
 
     .panel h2 {
-      margin: 0 0 12px;
-      font-size: 16px;
-      letter-spacing: .3px;
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.86);
     }
 
-    .row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    /* Form layout (mais estável que o flex “solto”) */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: end;
+    }
+
+    @media (max-width: 680px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.84);
     }
 
     input,
     select {
+      width: 100%;
       padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(0, 0, 0, 0.15);
-      color: white;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(0, 0, 0, 0.18);
+      color: var(--text);
       outline: none;
+      transition: border-color .15s ease, transform .08s ease, background .15s ease, box-shadow .15s ease;
     }
 
     input::placeholder {
-      color: rgba(255, 255, 255, 0.65);
+      color: rgba(255, 255, 255, 0.55);
     }
 
-    label {
-      font-size: 12px;
-      opacity: .9;
-      display: block;
-      margin: 8px 0 6px;
+    input:focus,
+    select:focus {
+      border-color: rgba(20, 184, 166, 0.55);
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.16);
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    /* Botões */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
     }
 
     button {
       padding: 10px 14px;
       border: none;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 700;
+      letter-spacing: .2px;
+      transition: transform .08s ease, filter .15s ease, opacity .15s ease;
+      user-select: none;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .btn {
-      background: #0f766e;
+      background: linear-gradient(180deg, var(--brand), var(--brand-2));
       color: white;
     }
 
+    .btn:hover {
+      filter: brightness(1.05);
+    }
+
     .btn2 {
-      background: #111827;
+      background: rgba(17, 24, 39, 0.75);
       color: white;
       border: 1px solid rgba(255, 255, 255, 0.14);
     }
 
+    .btn2:hover {
+      filter: brightness(1.08);
+    }
+
     .danger {
-      background: #b91c1c;
+      background: linear-gradient(180deg, var(--danger), var(--danger-2));
       color: white;
     }
 
-    .muted {
-      opacity: .85;
+    .danger:hover {
+      filter: brightness(1.03);
+    }
+
+    .btn-sm {
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Mensagens */
+    .msg {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      display: none;
+      border: 1px solid transparent;
+    }
+
+    .msg-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .msg button {
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 10px;
+    }
+
+    .error {
+      background: rgba(127, 29, 29, 0.55);
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+
+    .success {
+      background: rgba(6, 78, 59, 0.55);
+      border-color: rgba(20, 184, 166, 0.25);
+    }
+
+    /* Tabela */
+    .table-box {
+      margin-top: 12px;
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: auto;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 820px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      color: var(--card-text);
+      font-size: 13px;
+      vertical-align: middle;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-size: 11px;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    code {
+      background: rgba(17, 24, 39, 0.06);
+      padding: 2px 6px;
+      border-radius: 8px;
       font-size: 12px;
     }
 
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Cards do resultado */
     .cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 14px;
+      gap: 12px;
+      margin-top: 12px;
     }
 
     @media (max-width: 980px) {
@@ -125,61 +342,47 @@
       }
     }
 
+    @media (max-width: 520px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .card {
-      background: white;
-      color: #1f2937;
-      padding: 16px;
-      border-radius: 14px;
+      background: var(--card);
+      color: var(--card-text);
+      padding: 14px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
     }
 
     .card h3 {
       margin: 0 0 6px;
-      font-size: 12px;
-      letter-spacing: .4px;
+      font-size: 11px;
+      letter-spacing: .35px;
       text-transform: uppercase;
+      color: rgba(17, 24, 39, 0.72);
     }
 
     .card .value {
       font-size: 18px;
-      font-weight: bold;
+      font-weight: 800;
+      letter-spacing: .2px;
     }
 
     .alert {
       color: #b91c1c;
     }
 
-    .table-box {
-      margin-top: 16px;
-      background: white;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th,
-    td {
-      padding: 12px;
-      border-bottom: 1px solid #e5e7eb;
-      color: #1f2937;
-      font-size: 13px;
-    }
-
-    th {
-      background: #f3f4f6;
-      font-size: 11px;
-      text-transform: uppercase;
-    }
-
+    /* Pills */
     .pill {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       padding: 4px 10px;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: bold;
+      font-weight: 800;
+      gap: 6px;
     }
 
     .pill-ok {
@@ -197,60 +400,75 @@
       color: #075985;
     }
 
-    .error {
-      background: #7f1d1d;
-      padding: 10px;
-      border-radius: 10px;
-      display: none;
-      margin-top: 12px;
-    }
-
-    .success {
-      background: #064e3b;
-      padding: 10px;
-      border-radius: 10px;
-      display: none;
-      margin-top: 12px;
-    }
-
     a {
       color: #a7f3d0;
+    }
+
+    footer {
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 12px;
+      text-align: center;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Detecção de Transações Suspeitas</h1>
-    <p class="sub">CRUD de datasets + métodos estatísticos (Sigma, Z-score, IQR, MAD)</p>
+    <header>
+      <div>
+        <h1 class="title">Detecção de Transações Suspeitas</h1>
+        <p class="subtitle">CRUD de datasets + métodos estatísticos (Sigma, Z-score, IQR, MAD)</p>
+      </div>
+    </header>
 
     <div class="grid">
-      <div class="panel">
+      <section class="panel">
         <h2>1) Upload (Create)</h2>
-        <div class="row">
-          <div style="flex:1; min-width:220px;">
-            <label>Nome do dataset (opcional)</label>
-            <input id="dsName" type="text" placeholder="Ex.: Semana 02 - Pagamentos" style="width:100%;" />
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="dsName">Nome do dataset (opcional)</label>
+            <input id="dsName" type="text" placeholder="Ex.: Semana 02 - Pagamentos" />
           </div>
-          <div style="flex:1; min-width:260px;">
-            <label>Arquivo (.csv, .xlsx, .xls)</label>
-            <input id="dsFile" type="file" accept=".csv,.xlsx,.xls" style="width:100%;" />
+
+          <div class="field">
+            <label for="dsFile">Arquivo (.csv, .xlsx, .xls)</label>
+            <!-- corrigido: accept com pontos -->
+            <input id="dsFile" type="file" accept=".csv,.xlsx,.xls" />
           </div>
-          <div style="min-width:170px; margin-top:18px;">
-            <button class="btn" id="btnUpload">Salvar dataset</button>
+
+          <div class="field" style="grid-column: 1 / -1;">
+            <div class="btn-row">
+              <span class="muted" style="margin-right:auto;">
+                Dica: a coluna padrão é <b>valor</b> (você pode trocar em “Coluna”).
+              </span>
+              <button class="btn" id="btnUpload">Salvar dataset</button>
+            </div>
           </div>
         </div>
-        <div class="muted" style="margin-top:10px;">Dica: a coluna analisada padrão é <b>valor</b> (configurável
-          abaixo).</div>
-        <div class="error" id="errBox"></div>
-        <div class="success" id="okBox"></div>
-      </div>
 
-      <div class="panel">
+        <div class="msg error" id="errBox" role="alert" aria-live="polite">
+          <div class="msg-row">
+            <div id="errText"></div>
+            <button class="btn2 btn-sm" id="btnCloseErr" type="button">Fechar</button>
+          </div>
+        </div>
+
+        <div class="msg success" id="okBox" aria-live="polite">
+          <div class="msg-row">
+            <div id="okText"></div>
+            <button class="btn2 btn-sm" id="btnCloseOk" type="button">Fechar</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
         <h2>2) Configuração da Análise</h2>
-        <div class="row">
-          <div>
-            <label>Método</label>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="method">Método</label>
             <select id="method">
               <option value="sigma">Sigma (média ± k·desvio)</option>
               <option value="zscore">Z-score (|z| > k)</option>
@@ -258,48 +476,55 @@
               <option value="mad">MAD (mediana ± k·MAD)</option>
             </select>
           </div>
-          <div>
-            <label>k</label>
-            <input id="k" type="number" step="0.1" value="3" style="width:110px;" />
+
+          <div class="field">
+            <label for="k">k</label>
+            <input id="k" type="number" step="0.1" value="3" />
           </div>
-          <div>
-            <label>Direção</label>
+
+          <div class="field">
+            <label for="direction">Direção</label>
             <select id="direction">
               <option value="upper">Somente acima</option>
               <option value="lower">Somente abaixo</option>
               <option value="both">Ambos</option>
             </select>
           </div>
-          <div>
-            <label>Coluna</label>
-            <input id="column" type="text" value="valor" style="width:150px;" />
+
+          <div class="field">
+            <label for="column">Coluna</label>
+            <input id="column" type="text" value="valor" />
           </div>
-          <div>
-            <label>Streaming (CSV)</label>
+
+          <div class="field">
+            <label for="streaming">Streaming (CSV)</label>
             <select id="streaming">
               <option value="false">Não</option>
               <option value="true">Sim (média/desvio)</option>
             </select>
           </div>
-          <div>
-            <label>Máx. suspeitas</label>
-            <input id="maxSus" type="number" value="500" min="1" max="5000" style="width:120px;" />
+
+          <div class="field">
+            <label for="maxSus">Máx. suspeitas</label>
+            <input id="maxSus" type="number" value="500" min="1" max="5000" />
           </div>
         </div>
-        <div class="muted" style="margin-top:10px;">
-          Streaming é útil para CSV muito grande, mas só se aplica em Sigma/Z-score.
-        </div>
-      </div>
+
+        <p class="muted" style="margin: 10px 0 0;">
+          Streaming ajuda em CSV grande, mas só vale para <b>Sigma</b> e <b>Z-score</b>.
+        </p>
+      </section>
     </div>
 
-    <div class="panel" style="margin-top:18px;">
+    <section class="panel" style="margin-top:16px;">
       <h2>3) Datasets (Read / Update / Delete)</h2>
-      <div class="row" style="justify-content:space-between;">
-        <div class="muted">Clique em <b>Analisar</b> para rodar a detecção no dataset.</div>
+
+      <div class="btn-row" style="margin-top:8px;">
+        <div class="muted">Use <b>Analisar</b> para rodar a detecção no dataset.</div>
         <button class="btn2" id="btnRefresh">Atualizar lista</button>
       </div>
 
-      <div class="table-box" style="margin-top:12px;">
+      <div class="table-box">
         <table>
           <thead>
             <tr>
@@ -315,9 +540,9 @@
           <tbody id="dsTbody"></tbody>
         </table>
       </div>
-    </div>
+    </section>
 
-    <div class="panel" style="margin-top:18px;">
+    <section class="panel" style="margin-top:16px;">
       <h2>4) Resultado da Análise</h2>
       <div class="muted" id="resultHint">Selecione <b>Analisar</b> em algum dataset.</div>
 
@@ -340,7 +565,7 @@
         </div>
       </div>
 
-      <div class="table-box">
+      <div class="table-box" style="margin-top:12px;">
         <table>
           <thead>
             <tr id="susHead"></tr>
@@ -348,8 +573,13 @@
           <tbody id="susBody"></tbody>
         </table>
       </div>
+
       <div class="muted" id="truncMsg" style="margin-top:10px;"></div>
-    </div>
+    </section>
+
+    <footer>
+      Projeto acadêmico • Interface simples, sem frameworks • Foco em clareza e manutenção
+    </footer>
   </div>
 
   <script>
@@ -357,20 +587,23 @@
 
     function showErr(msg) {
       const box = $('errBox');
+      $('errText').textContent = msg;
       box.style.display = 'block';
-      box.textContent = msg;
       $('okBox').style.display = 'none';
     }
+
     function showOk(msg) {
       const box = $('okBox');
+      $('okText').textContent = msg;
       box.style.display = 'block';
-      box.textContent = msg;
       $('errBox').style.display = 'none';
     }
+
     function clearMsg() {
       $('errBox').style.display = 'none';
       $('okBox').style.display = 'none';
     }
+
     function fmtBytes(bytes) {
       const sizes = ['B', 'KB', 'MB', 'GB'];
       if (!bytes && bytes !== 0) return '--';
@@ -378,9 +611,11 @@
       while (v >= 1024 && i < sizes.length - 1) { v /= 1024; i++; }
       return v.toFixed(1) + ' ' + sizes[i];
     }
+
     function pill(html, cls) {
       return `<span class="pill ${cls}">${html}</span>`;
     }
+
     function getAnalyzeConfig() {
       return {
         method: $('method').value,
@@ -404,41 +639,55 @@
 
     async function refreshDatasets() {
       const tbody = $('dsTbody');
-      tbody.innerHTML = `<tr><td colspan="7">Carregando...</td></tr>`;
-      const list = await apiJson('/datasets');
-      if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7">Nenhum dataset salvo ainda.</td></tr>`;
-        return;
-      }
-      tbody.innerHTML = '';
-      for (const ds of list) {
-        const last = ds.last_analysis_at
-          ? pill(`${ds.last_analysis_method || '--'} · ${ds.last_suspeitas_count ?? '--'} suspeitas`, (ds.last_suspeitas_count || 0) > 0 ? 'pill-warn' : 'pill-ok')
-          : pill('sem análise', 'pill-info');
+      const btn = $('btnRefresh');
 
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><code>${ds.id}</code></td>
-          <td>${escapeHtml(ds.name)}</td>
-          <td>${escapeHtml(ds.original_filename)}</td>
-          <td>${fmtBytes(ds.size_bytes)}</td>
-          <td>${escapeHtml(new Date(ds.uploaded_at).toLocaleString('pt-BR'))}</td>
-          <td>${last}</td>
-          <td>
-            <button class="btn" data-act="analyze" data-id="${ds.id}">Analisar</button>
-            <button class="btn2" data-act="view" data-id="${ds.id}">Ver último</button>
-            <button class="btn2" data-act="rename" data-id="${ds.id}">Renomear</button>
-            <button class="btn2" data-act="replace" data-id="${ds.id}">Substituir</button>
-            <button class="danger" data-act="delete" data-id="${ds.id}">Excluir</button>
-            <input type="file" accept=".csv,.xlsx,.xls" style="display:none" data-file="${ds.id}" />
-          </td>
-        `;
-        tbody.appendChild(tr);
+      btn.disabled = true;
+      tbody.innerHTML = `<tr><td colspan="7">Carregando...</td></tr>`;
+
+      try {
+        const list = await apiJson('/datasets');
+        if (list.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7">Nenhum dataset salvo ainda.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = '';
+        for (const ds of list) {
+          const last = ds.last_analysis_at
+            ? pill(
+              `${(ds.last_analysis_method || '--').toUpperCase()} · ${ds.last_suspeitas_count ?? '--'} suspeitas`,
+              (ds.last_suspeitas_count || 0) > 0 ? 'pill-warn' : 'pill-ok'
+            )
+            : pill('sem análise', 'pill-info');
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><code>${ds.id}</code></td>
+            <td>${escapeHtml(ds.name)}</td>
+            <td>${escapeHtml(ds.original_filename)}</td>
+            <td>${fmtBytes(ds.size_bytes)}</td>
+            <td>${escapeHtml(new Date(ds.uploaded_at).toLocaleString('pt-BR'))}</td>
+            <td>${last}</td>
+            <td>
+              <div class="actions">
+                <button class="btn btn-sm" data-act="analyze" data-id="${ds.id}">Analisar</button>
+                <button class="btn2 btn-sm" data-act="view" data-id="${ds.id}">Ver último</button>
+                <button class="btn2 btn-sm" data-act="rename" data-id="${ds.id}">Renomear</button>
+                <button class="btn2 btn-sm" data-act="replace" data-id="${ds.id}">Substituir</button>
+                <button class="danger btn-sm" data-act="delete" data-id="${ds.id}">Excluir</button>
+                <input type="file" accept=".csv,.xlsx,.xls" style="display:none" data-file="${ds.id}" />
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        }
+      } finally {
+        btn.disabled = false;
       }
     }
 
     function escapeHtml(s) {
-      return String(s)
+      return String(s ?? '')
         .replaceAll('&', '&amp;')
         .replaceAll('<', '&lt;')
         .replaceAll('>', '&gt;')
@@ -447,18 +696,20 @@
     }
 
     function renderResult(result) {
-      $('resultHint').textContent = `Análise em ${new Date(result.analysis_at).toLocaleString('pt-BR')} · coluna: ${result.column}`;
+      $('resultHint').textContent =
+        `Análise em ${new Date(result.analysis_at).toLocaleString('pt-BR')} · coluna: ${result.column}`;
 
-      $('rMethod').textContent = result.method.toUpperCase();
-      $('rCount').textContent = result.quantidade_suspeitas;
+      $('rMethod').textContent = String(result.method || '--').toUpperCase();
+      $('rCount').textContent = result.quantidade_suspeitas ?? '--';
 
-      const statsPairs = Object.entries(result.stats || {}).map(([k, v]) => `${k}=${v}`).join(' · ');
+      const statsPairs = Object.entries(result.stats || {})
+        .map(([k, v]) => `${k}=${v}`)
+        .join(' · ');
       $('rStats').textContent = statsPairs || '--';
 
       const th = result.thresholds || {};
       $('rThresh').textContent = `lower=${th.lower ?? '--'} · upper=${th.upper ?? '--'}`;
 
-      // tabela dinâmica
       const head = $('susHead');
       const body = $('susBody');
       head.innerHTML = '';
@@ -489,11 +740,16 @@
 
     async function handleUpload() {
       clearMsg();
+
       const file = $('dsFile').files[0];
       if (!file) { showErr('Escolha um arquivo.'); return; }
 
+      const btn = $('btnUpload');
+      btn.disabled = true;
+
       const fd = new FormData();
       fd.append('arquivo', file);
+
       const name = $('dsName').value.trim();
       if (name) fd.append('name', name);
 
@@ -505,11 +761,15 @@
         await refreshDatasets();
       } catch (e) {
         showErr(e.message);
+      } finally {
+        btn.disabled = false;
       }
     }
 
     async function analyze(id) {
+      clearMsg();
       const cfg = getAnalyzeConfig();
+
       try {
         const result = await apiJson(`/datasets/${id}/analyze`, {
           method: 'POST',
@@ -524,6 +784,7 @@
     }
 
     async function viewLast(id) {
+      clearMsg();
       try {
         const result = await apiJson(`/datasets/${id}/result`);
         renderResult(result);
@@ -535,11 +796,14 @@
     async function renameDataset(id) {
       const newName = prompt('Novo nome do dataset:');
       if (!newName) return;
+
+      clearMsg();
       try {
         const fd = new FormData();
         fd.append('name', newName);
         await apiJson(`/datasets/${id}`, { method: 'PUT', body: fd });
         await refreshDatasets();
+        showOk('Nome atualizado.');
       } catch (e) {
         showErr(e.message);
       }
@@ -551,6 +815,8 @@
       input.onchange = async () => {
         const file = input.files[0];
         if (!file) return;
+
+        clearMsg();
         try {
           const fd = new FormData();
           fd.append('arquivo', file);
@@ -567,9 +833,12 @@
 
     async function deleteDataset(id) {
       if (!confirm(`Excluir dataset ${id}?`)) return;
+
+      clearMsg();
       try {
         await apiJson(`/datasets/${id}`, { method: 'DELETE' });
         await refreshDatasets();
+        showOk('Dataset excluído.');
       } catch (e) {
         showErr(e.message);
       }
@@ -579,7 +848,10 @@
     $('btnUpload').addEventListener('click', handleUpload);
     $('btnRefresh').addEventListener('click', () => refreshDatasets().catch(e => showErr(e.message)));
 
-    // defaults por método
+    $('btnCloseErr').addEventListener('click', () => $('errBox').style.display = 'none');
+    $('btnCloseOk').addEventListener('click', () => $('okBox').style.display = 'none');
+
+    // defaults por método (mantive sua ideia, só mais “amarrado”)
     $('method').addEventListener('change', () => {
       const m = $('method').value;
       const defaults = { sigma: 3, zscore: 3, iqr: 1.5, mad: 3.5 };
@@ -589,6 +861,7 @@
     $('dsTbody').addEventListener('click', (ev) => {
       const btn = ev.target.closest('button');
       if (!btn) return;
+
       const act = btn.getAttribute('data-act');
       const id = btn.getAttribute('data-id');
       if (!act || !id) return;
