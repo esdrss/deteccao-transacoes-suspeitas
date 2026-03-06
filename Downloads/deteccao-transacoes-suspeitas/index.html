@@ -8,7 +8,6 @@
 
   <style>
     :root {
-      /* Paleta (sensação: tech + confiável + “calmo”) */
       --bg-0: #062a2c;
       --bg-1: #041f21;
       --panel: rgba(255, 255, 255, 0.07);
@@ -40,6 +39,7 @@
     }
 
     body {
+      scroll-behavior: smooth;
       margin: 0;
       min-height: 100vh;
       color: var(--text);
@@ -410,7 +410,20 @@
       font-size: 12px;
       text-align: center;
     }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -424,7 +437,7 @@
 
     <div class="grid">
       <section class="panel">
-        <h2>1) Upload (Create)</h2>
+        <h2> Upload </h2>
 
         <div class="form-grid">
           <div class="field">
@@ -434,7 +447,6 @@
 
           <div class="field">
             <label for="dsFile">Arquivo (.csv, .xlsx, .xls)</label>
-            <!-- corrigido: accept com pontos -->
             <input id="dsFile" type="file" accept=".csv,.xlsx,.xls" />
           </div>
 
@@ -464,7 +476,7 @@
       </section>
 
       <section class="panel">
-        <h2>2) Configuração da Análise</h2>
+        <h2>Configuração da Análise</h2>
 
         <div class="form-grid">
           <div class="field">
@@ -517,12 +529,7 @@
     </div>
 
     <section class="panel" style="margin-top:16px;">
-      <h2>3) Datasets (Read / Update / Delete)</h2>
-
-      <div class="btn-row" style="margin-top:8px;">
-        <div class="muted">Use <b>Analisar</b> para rodar a detecção no dataset.</div>
-        <button class="btn2" id="btnRefresh">Atualizar lista</button>
-      </div>
+      <h2> Datasets </h2>
 
       <div class="table-box">
         <table>
@@ -543,7 +550,7 @@
     </section>
 
     <section class="panel" style="margin-top:16px;">
-      <h2>4) Resultado da Análise</h2>
+      <h2>Resultado da Análise</h2>
       <div class="muted" id="resultHint">Selecione <b>Analisar</b> em algum dataset.</div>
 
       <div class="cards">
@@ -577,8 +584,48 @@
       <div class="muted" id="truncMsg" style="margin-top:10px;"></div>
     </section>
 
+    <section id="sessao-grafico" class="panel" style="margin-top:16px; display: none;">
+      <h2>Gráfico de Tendência e Anomalias</h2>
+      <p class="muted">Os pontos a vermelho destacam os valores considerados suspeitos.</p>
+
+      <div style="display: flex; gap: 16px; margin-bottom: 12px; align-items: center; font-size: 13px;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="display: inline-block; width: 16px; height: 3px; background: rgba(20, 184, 166, 0.5);"></span>
+          Todos os Valores
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span
+            style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
+          Transações Suspeitas
+        </div>
+      </div>
+      <div style="position: relative; height: 400px; width: 100%; overflow-x: auto; overflow-y: hidden;">
+        <div id="boxGrafico" style="position: relative; height: 100%; min-width: 100%;">
+          <canvas id="graficoLinha"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <div id="modalGrafico"
+      style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 9999; align-items: center; justify-content: center;">
+      <div class="panel"
+        style="position: relative; max-width: 420px; width: 90%; text-align: center; animation: modalIn 0.3s ease; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+
+        <button id="btnFecharX"
+          style="position: absolute; top: 12px; right: 16px; background: transparent; border: none; color: var(--muted); font-size: 24px; cursor: pointer; padding: 0; line-height: 1; transition: color 0.2s;"
+          onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">&times;</button>
+
+        <h2 style="margin-top: 0; font-size: 18px; color: var(--brand);">Análise Concluída! 🚀</h2>
+        <p id="modalMsg" style="color: var(--text); font-size: 14px; margin-bottom: 24px; line-height: 1.5;"></p>
+        <div style="display: flex; gap: 12px; justify-content: center;">
+          <button class="btn2" id="btnNaoGrafico" style="flex: 1;">Apenas Tabela</button>
+          <button class="btn" id="btnSimGrafico" style="flex: 1;">📉 Ver Gráfico</button>
+        </div>
+      </div>
+    </div>
+
     <footer>
-      Projeto acadêmico • Interface simples, sem frameworks • Foco em clareza e manutenção
+      Detecção de Transações Suspeitas - By Débora Ribeiro, Esdras Vitor, Tiago Lucas
     </footer>
   </div>
 
@@ -639,9 +686,7 @@
 
     async function refreshDatasets() {
       const tbody = $('dsTbody');
-      const btn = $('btnRefresh');
 
-      btn.disabled = true;
       tbody.innerHTML = `<tr><td colspan="7">Carregando...</td></tr>`;
 
       try {
@@ -671,7 +716,7 @@
             <td>
               <div class="actions">
                 <button class="btn btn-sm" data-act="analyze" data-id="${ds.id}">Analisar</button>
-                <button class="btn2 btn-sm" data-act="view" data-id="${ds.id}">Ver último</button>
+                <button class="btn2 btn-sm" data-act="view" data-id="${ds.id}">Rever análise</button>
                 <button class="btn2 btn-sm" data-act="rename" data-id="${ds.id}">Renomear</button>
                 <button class="btn2 btn-sm" data-act="replace" data-id="${ds.id}">Substituir</button>
                 <button class="danger btn-sm" data-act="delete" data-id="${ds.id}">Excluir</button>
@@ -681,8 +726,8 @@
           `;
           tbody.appendChild(tr);
         }
-      } finally {
-        btn.disabled = false;
+      } catch (e) {
+        showErr(e.message);
       }
     }
 
@@ -695,7 +740,68 @@
         .replaceAll("'", '&#39;');
     }
 
-    function renderResult(result) {
+    let meuGrafico = null;
+
+    function desenharGrafico(chartData) {
+      const sessaoGrafico = $('sessao-grafico');
+
+      if (!chartData) {
+        sessaoGrafico.style.display = 'none';
+        return;
+      }
+
+      sessaoGrafico.style.display = 'block';
+      const larguraIdeal = chartData.labels.length * 10;
+      $('boxGrafico').style.width = larguraIdeal > window.innerWidth ? larguraIdeal + 'px' : '100%';
+      const ctx = $('graficoLinha').getContext('2d');
+
+      if (meuGrafico) {
+        meuGrafico.destroy();
+      }
+
+      meuGrafico = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartData.labels,
+          datasets: [
+            {
+              label: 'Todos os Valores',
+              data: chartData.values,
+              borderColor: 'rgba(20, 184, 166, 0.5)',
+              borderWidth: 1.5,
+              pointRadius: 2,
+              tension: 0.1
+            },
+            {
+              label: 'Transações Suspeitas',
+              data: chartData.suspeitos,
+              backgroundColor: '#ef4444',
+              borderColor: '#ef4444',
+              borderWidth: 0,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+              pointStyle: 'circle'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: { ticks: { color: 'rgba(255,255,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.1)' } },
+            y: { ticks: { color: 'rgba(255,255,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.1)' } }
+          }
+        }
+      });
+    }
+    function renderResult(result, isReview = false) {
       $('resultHint').textContent =
         `Análise em ${new Date(result.analysis_at).toLocaleString('pt-BR')} · coluna: ${result.column}`;
 
@@ -726,16 +832,51 @@
           thEl.textContent = c;
           head.appendChild(thEl);
         }
+        let linhasHTML = '';
         for (const r of rows) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = cols.map(c => `<td>${escapeHtml(r[c])}</td>`).join('');
-          body.appendChild(tr);
+          linhasHTML += `<tr>${cols.map(c => `<td>${escapeHtml(r[c])}</td>`).join('')}</tr>`;
         }
+        body.innerHTML = linhasHTML;
       }
 
       $('truncMsg').textContent = result.truncated
         ? `⚠️ A lista de suspeitas foi limitada a ${$('maxSus').value}. Total real: ${result.quantidade_suspeitas}.`
         : '';
+
+      $('sessao-grafico').style.display = 'none';
+
+      if (result.chart_data) {
+        if (isReview) {
+          desenharGrafico(result.chart_data);
+          $('sessao-grafico').style.display = 'block';
+          setTimeout(() => {
+            $('sessao-grafico').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 50);
+        } else {
+          setTimeout(() => {
+            const modal = $('modalGrafico');
+            const msg = $('modalMsg');
+            const btnSim = $('btnSimGrafico');
+            const btnNao = $('btnNaoGrafico');
+            const btnX = $('btnFecharX');
+
+            msg.innerHTML = `Foram encontradas <b style="color: var(--danger); font-size: 16px;">${result.quantidade_suspeitas}</b> transações suspeitas.<br><br>Deseja visualizar o gráfico de tendência agora?`;
+
+            modal.style.display = 'flex';
+
+            btnNao.onclick = () => modal.style.display = 'none';
+            btnX.onclick = () => modal.style.display = 'none';
+
+            btnSim.onclick = () => {
+              modal.style.display = 'none';
+              desenharGrafico(result.chart_data);
+              setTimeout(() => {
+                $('sessao-grafico').scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 50);
+            };
+          }, 150);
+        }
+      }
     }
 
     async function handleUpload() {
@@ -787,7 +928,7 @@
       clearMsg();
       try {
         const result = await apiJson(`/datasets/${id}/result`);
-        renderResult(result);
+        renderResult(result, true);
       } catch (e) {
         showErr(e.message);
       }
@@ -844,14 +985,10 @@
       }
     }
 
-    // events
     $('btnUpload').addEventListener('click', handleUpload);
-    $('btnRefresh').addEventListener('click', () => refreshDatasets().catch(e => showErr(e.message)));
-
     $('btnCloseErr').addEventListener('click', () => $('errBox').style.display = 'none');
     $('btnCloseOk').addEventListener('click', () => $('okBox').style.display = 'none');
 
-    // defaults por método (mantive sua ideia, só mais “amarrado”)
     $('method').addEventListener('change', () => {
       const m = $('method').value;
       const defaults = { sigma: 3, zscore: 3, iqr: 1.5, mad: 3.5 };
