@@ -16,16 +16,13 @@ from pydantic import BaseModel, Field
 
 import storage
 
-
 APP_DIR = Path(__file__).resolve().parent
 INDEX_HTML = APP_DIR / "index.html"
-
 
 def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
-
-app = FastAPI(title="Detecção de Transações Suspeitas (CRUD + Análise)")
+app = FastAPI(title="Detecção de Transações Suspeitas")
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,7 +30,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
 
 class DatasetOut(BaseModel):
     id: str
@@ -47,7 +43,6 @@ class DatasetOut(BaseModel):
     last_suspeitas_count: Optional[int] = None
     last_thresholds: Optional[Dict[str, Any]] = None
 
-
 class AnalyzeRequest(BaseModel):
     method: Literal["sigma", "zscore", "iqr", "mad"] = "sigma"
     # "k" é o multiplicador/limiar principal do método.
@@ -56,7 +51,6 @@ class AnalyzeRequest(BaseModel):
     column: str = "valor"
     streaming: bool = False
     max_suspeitas: int = Field(default=500, ge=1, le=5000)
-
 
 def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     # Padroniza nomes de colunas para evitar bugs do Excel (espaços, maiúsculas etc.)
@@ -258,7 +252,6 @@ def _analyze_df(df: pd.DataFrame, req: AnalyzeRequest) -> Dict[str, Any]:
         suspeitas_df = suspeitas_df.head(req.max_suspeitas)
         truncated = True
 
-    # Pequenos arredondamentos para deixar apresentável
     def r2(x: Optional[float]) -> Optional[float]:
         return None if x is None else round(float(x), 2)
 
@@ -267,6 +260,31 @@ def _analyze_df(df: pd.DataFrame, req: AnalyzeRequest) -> Dict[str, Any]:
     thresholds = {"lower": r2(thresholds["lower"]), "upper": r2(thresholds["upper"])}
 
     dt_ms = int((time.perf_counter() - t0) * 1000)
+
+# --- INÍCIO DA PREPARAÇÃO DOS DADOS DO GRÁFICO ---
+    # Limite para não travar o navegador do usuário (boa prática de Big Data)
+    chart_limit = 5000 
+    
+    # Pegamos os primeiros N valores originais e a máscara de suspeitos correspondente
+    df_chart = df2.head(chart_limit)
+    mask_chart = mask.head(chart_limit)
+    
+    chart_labels = list(range(1, len(df_chart) + 1))
+    chart_values = df_chart[col].tolist()
+    
+    # Cria uma lista onde só há valor se for suspeito, senão fica nulo (None)
+    chart_suspeitos = [
+        val if is_sus else None 
+        for val, is_sus in zip(chart_values, mask_chart)
+    ]
+    
+    chart_data = {
+        "labels": chart_labels,
+        "values": chart_values,
+        "suspeitos": chart_suspeitos
+    }
+    # --- FIM DA PREPARAÇÃO DOS DADOS DO GRÁFICO ---
+
     return {
         "method": method,
         "direction": direction,
@@ -279,8 +297,8 @@ def _analyze_df(df: pd.DataFrame, req: AnalyzeRequest) -> Dict[str, Any]:
         "analysis_ms": dt_ms,
         "analysis_at": utc_now_iso(),
         "n_valid": int(len(series)),
+        "chart_data": chart_data,
     }
-
 
 def _analyze_path(path: Path, req: AnalyzeRequest) -> Dict[str, Any]:
     """Analisa arquivo em disco.
@@ -322,7 +340,7 @@ def _analyze_path(path: Path, req: AnalyzeRequest) -> Dict[str, Any]:
             total_sus += int(len(sus_chunk))
             if len(suspeitas) < req.max_suspeitas:
                 take = req.max_suspeitas - len(suspeitas)
-                sus_chunk_json = json.loads(sus_chunk.head(take).to_json(orient="records", date_format="iso")) # <--- NOVA LINHA
+                sus_chunk_json = json.loads(sus_chunk.head(take).to_json(orient="records", date_format="iso"))
                 suspeitas.extend(sus_chunk_json)
         truncated = total_sus > req.max_suspeitas
 
@@ -418,7 +436,6 @@ def list_datasets() -> List[DatasetOut]:
         for m in ordered
     ]
 
-
 @app.get("/datasets/{dataset_id}", response_model=DatasetOut)
 def get_dataset(dataset_id: str) -> DatasetOut:
     meta = storage.get_dataset(dataset_id)
@@ -436,7 +453,6 @@ def get_dataset(dataset_id: str) -> DatasetOut:
         last_suspeitas_count=meta.last_suspeitas_count,
         last_thresholds=meta.last_thresholds,
     )
-
 
 @app.put("/datasets/{dataset_id}", response_model=DatasetOut)
 async def update_dataset(
@@ -468,7 +484,6 @@ async def update_dataset(
         last_suspeitas_count=meta.last_suspeitas_count,
         last_thresholds=meta.last_thresholds,
     )
-
 
 @app.delete("/datasets/{dataset_id}")
 def delete_dataset(dataset_id: str) -> Dict[str, str]:
