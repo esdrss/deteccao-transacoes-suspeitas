@@ -10,19 +10,22 @@ from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import pandas as pd
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel, Field
 
+
 import storage
 
 APP_DIR = Path(__file__).resolve().parent
-INDEX_HTML = APP_DIR / "index.html"
+INDEX_HTML = APP_DIR.parent / "Frontend" / "index.html"
 
 def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 app = FastAPI(title="Detecção de Transações Suspeitas")
+app.mount("/static", StaticFiles(directory=APP_DIR.parent / "Frontend"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
