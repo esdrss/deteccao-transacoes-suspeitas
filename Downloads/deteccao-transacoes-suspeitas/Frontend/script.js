@@ -190,9 +190,25 @@ function desenharGrafico(chartData) {
                 legend: { display: false },
                 // Formata a caixinha ao passar o mouse (Tooltip)
                 tooltip: {
+                    // Filtro para não exibir os dois juntos nas suspeitas
+                    filter: function (tooltipItem, index, tooltipItems) {
+                        // Se houver normal e suspeito no mesmo ponto, oculta o normal (dataset 0)
+                        if (tooltipItems.length > 1 && tooltipItem.datasetIndex === 0) {
+                            return false;
+                        }
+                        return true;
+                    },
                     callbacks: {
                         label: function (context) {
                             let label = context.dataset.label || '';
+
+                            // Substitui o texto "Todos os Valores" no tooltip
+                            if (label === 'Todos os Valores') {
+                                label = 'Transação Normal';
+                            } else if (label === 'Transações Suspeitas') {
+                                label = 'Transação Suspeita';
+                            }
+
                             if (label) {
                                 label += ': ';
                             }

@@ -25,11 +25,11 @@
 
     <div class="grid">
       <section class="panel">
-        <h2> Upload </h2>
+        <h2> Enviar Arquivo </h2>
 
         <div class="form-grid">
           <div class="field">
-            <label for="dsName">Nome do dataset (opcional)</label>
+            <label for="dsName">Nome da base de dados (opcional)</label>
             <input id="dsName" type="text" placeholder="Ex.: Semana 02 - Pagamentos" />
           </div>
 
@@ -43,7 +43,7 @@
               <span class="muted" style="margin-right:auto;">
                 Dica: a coluna padrão é <b>valor</b> (você pode trocar em “Coluna”).
               </span>
-              <button class="btn" id="btnUpload">Salvar dataset</button>
+              <button class="btn" id="btnUpload">Salvar base de dados</button>
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
           </div>
 
           <div class="field">
-            <label for="streaming">Streaming (CSV)</label>
+            <label for="streaming">Leitura em Lotes (CSV)</label>
             <select id="streaming">
               <option value="false">Não</option>
               <option value="true">Sim (média/desvio)</option>
@@ -111,13 +111,13 @@
         </div>
 
         <p class="muted" style="margin: 10px 0 0;">
-          Streaming ajuda em CSV grande, mas só vale para <b>Sigma</b> e <b>Z-score</b>.
+          Leitura em Lotes ajuda em CSV grande, mas só vale para <b>Sigma</b> e <b>Z-score</b>.
         </p>
       </section>
     </div>
 
     <section class="panel" style="margin-top:16px;">
-      <h2> Datasets </h2>
+      <h2> Base de dados </h2>
 
       <div class="table-box">
         <table>
@@ -127,7 +127,7 @@
               <th>Nome</th>
               <th>Arquivo</th>
               <th>Tamanho</th>
-              <th>Upload</th>
+              <th>Data de Envio</th>
               <th>Última análise</th>
               <th>Ações</th>
             </tr>
@@ -139,7 +139,7 @@
 
     <section class="panel" style="margin-top:16px;">
       <h2>Resultado da Análise</h2>
-      <div class="muted" id="resultHint">Selecione <b>Analisar</b> em algum dataset.</div>
+      <div class="muted" id="resultHint">Selecione <b>Analisar</b> em alguma base de dados.</div>
 
       <div class="cards">
         <div class="card">
@@ -179,7 +179,7 @@
       <div style="display: flex; gap: 16px; margin-bottom: 12px; align-items: center; font-size: 13px;">
         <div style="display: flex; align-items: center; gap: 6px;">
           <span style="display: inline-block; width: 16px; height: 3px; background: var(--brand);"></span>
-          Todos os Valores
+          Transações Normais
         </div>
         <div style="display: flex; align-items: center; gap: 6px;">
           <span
