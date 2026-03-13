@@ -1,0 +1,55 @@
+{
+  "datasets": {
+    "7e3796ebc1e7": {
+      "id": "7e3796ebc1e7",
+      "name": "Planilha fatura do cartão Fevereiro",
+      "original_filename": "gastos_ficticios.xlsx",
+      "stored_filename": "7e3796ebc1e7.xlsx",
+      "size_bytes": 12266,
+      "uploaded_at": "2026-02-28T04:32:01.598307+00:00",
+      "updated_at": "2026-03-05T04:19:38.113082+00:00",
+      "last_analysis_at": "2026-03-05T04:19:38.091479+00:00",
+      "last_analysis_method": "mad",
+      "last_suspeitas_count": 5,
+      "last_thresholds": {
+        "lower": -1395.63,
+        "upper": 3319.43
+      },
+      "notes": {}
+    },
+    "a2e455c563f8": {
+      "id": "a2e455c563f8",
+      "name": "Planilha de gastos",
+      "original_filename": "gastos_ficticios.xlsx",
+      "stored_filename": "a2e455c563f8.xlsx",
+      "size_bytes": 12266,
+      "uploaded_at": "2026-03-05T03:29:07.540964+00:00",
+      "updated_at": "2026-03-05T13:02:29.823487+00:00",
+      "last_analysis_at": "2026-03-05T13:02:29.807791+00:00",
+      "last_analysis_method": "sigma",
+      "last_suspeitas_count": 3,
+      "last_thresholds": {
+        "lower": null,
+        "upper": 6596.8
+      },
+      "notes": {}
+    },
+    "0666e14fbf8a": {
+      "id": "0666e14fbf8a",
+      "name": "Planilha teste CSV",
+      "original_filename": "transaçõesTesteCSV.csv",
+      "stored_filename": "0666e14fbf8a.csv",
+      "size_bytes": 36920,
+      "uploaded_at": "2026-03-05T03:59:08.596353+00:00",
+      "updated_at": "2026-03-06T02:56:00.499031+00:00",
+      "last_analysis_at": "2026-03-06T02:56:00.465134+00:00",
+      "last_analysis_method": "sigma",
+      "last_suspeitas_count": 23,
+      "last_thresholds": {
+        "lower": null,
+        "upper": 32833.64
+      },
+      "notes": {}
+    }
+  }
+}
