@@ -1,0 +1,501 @@
+ID_Transacao,Data,Categoria,Descricao,Metodo_Pagamento,Valor
+S-0001,2025-03-29 00:00:00,Vestuário,Restaurante Sabor & Arte,Dinheiro,18367.84
+N-0002,2025-02-24 00:00:00,Saúde,Mercado Bom Preço,Cartão de crédito,1969.24
+N-0003,2025-02-17 00:00:00,Educação,Academia Fit+,Pix,676.18
+N-0004,2025-03-27 00:00:00,Outros,Oficina do Carro,Cartão de crédito,2478.49
+N-0005,2025-11-15 00:00:00,Vestuário,Mercado Bom Preço,Cartão de débito,1296.47
+N-0006,2025-07-30 00:00:00,Vestuário,Loja Center,Cartão de débito,1624.3
+N-0007,2025-09-20 00:00:00,Moradia,Hortifruti Verde Vida,Dinheiro,1329.07
+N-0008,2025-05-15 00:00:00,Alimentação,StreamingFlix,Cartão de débito,1532.51
+N-0009,2025-08-05 00:00:00,Educação,Oficina do Carro,Cartão de débito,2289.77
+N-0010,2025-03-19 00:00:00,Alimentação,Posto Avenida,Dinheiro,3308.42
+S-0011,2026-02-10 00:00:00,Saúde,Restaurante Sabor & Arte,Pix,23171.75
+N-0012,2025-11-03 00:00:00,Educação,Hortifruti Verde Vida,Dinheiro,917.97
+N-0013,2025-08-11 00:00:00,Assinaturas,Farmácia Popular,Pix,2477.68
+N-0014,2025-11-05 00:00:00,Moradia,Posto Avenida,Pix,2151.06
+N-0015,2026-02-15 00:00:00,Educação,StreamingFlix,Dinheiro,2007.49
+N-0016,2025-06-13 00:00:00,Saúde,Restaurante Sabor & Arte,Boleto,1093.22
+N-0017,2025-01-04 00:00:00,Vestuário,Padaria Pão Quente,Boleto,1609.94
+S-0018,2025-05-09 00:00:00,Transporte,Livraria Cultura,Cartão de débito,44664.86
+N-0019,2025-12-08 00:00:00,Assinaturas,Livraria Cultura,Pix,2997.61
+S-0020,2026-01-24 00:00:00,Alimentação,Restaurante Sabor & Arte,Cartão de débito,18952.56
+N-0021,2025-09-20 00:00:00,Lazer,Delivery Já,Cartão de crédito,3048.74
+N-0022,2026-01-07 00:00:00,Assinaturas,Restaurante Sabor & Arte,Boleto,662.57
+N-0023,2025-12-20 00:00:00,Transporte,EletroTech,Boleto,376.52
+N-0024,2025-04-08 00:00:00,Educação,EletroTech,Dinheiro,448.24
+N-0025,2025-05-17 00:00:00,Alimentação,Farmácia Popular,Cartão de débito,976.39
+N-0026,2025-07-02 00:00:00,Educação,Padaria Pão Quente,Dinheiro,2179.4
+N-0027,2026-02-06 00:00:00,Alimentação,Clínica Saúde Total,Cartão de crédito,173.78
+N-0028,2025-12-06 00:00:00,Outros,StreamingFlix,Cartão de débito,678.61
+N-0029,2025-01-16 00:00:00,Saúde,Oficina do Carro,Pix,726.98
+N-0030,2025-09-21 00:00:00,Educação,Clínica Saúde Total,Cartão de débito,617.37
+N-0031,2025-11-01 00:00:00,Lazer,Hortifruti Verde Vida,Boleto,683.57
+N-0032,2025-10-05 00:00:00,Alimentação,Oficina do Carro,Cartão de crédito,1565.35
+N-0033,2025-08-06 00:00:00,Lazer,EletroTech,Cartão de crédito,677.93
+N-0034,2025-04-27 00:00:00,Serviços,Padaria Pão Quente,Boleto,811.86
+N-0035,2026-03-14 00:00:00,Assinaturas,Oficina do Carro,Cartão de crédito,2660.19
+N-0036,2025-05-22 00:00:00,Lazer,Padaria Pão Quente,Cartão de débito,3771.67
+N-0037,2026-03-08 00:00:00,Serviços,Clínica Saúde Total,Cartão de débito,1937.35
+S-0038,2025-03-05 00:00:00,Assinaturas,Padaria Pão Quente,Cartão de débito,29912.29
+N-0039,2025-01-14 00:00:00,Assinaturas,Loja Center,Cartão de débito,2201.61
+N-0040,2025-12-06 00:00:00,Alimentação,Clínica Saúde Total,Boleto,1942.66
+N-0041,2025-09-29 00:00:00,Outros,Clínica Saúde Total,Boleto,1327.7
+N-0042,2026-01-11 00:00:00,Lazer,Livraria Cultura,Dinheiro,1476.85
+N-0043,2025-03-28 00:00:00,Transporte,Farmácia Popular,Cartão de débito,2964.82
+N-0044,2025-08-05 00:00:00,Serviços,StreamingFlix,Pix,3580.79
+N-0045,2025-10-27 00:00:00,Moradia,StreamingFlix,Cartão de débito,3530.0
+N-0046,2026-03-10 00:00:00,Educação,Restaurante Sabor & Arte,Boleto,3749.54
+N-0047,2025-10-28 00:00:00,Transporte,Mercado Bom Preço,Cartão de débito,3061.39
+N-0048,2026-03-04 00:00:00,Saúde,Delivery Já,Pix,1809.69
+N-0049,2025-05-02 00:00:00,Moradia,Hortifruti Verde Vida,Cartão de crédito,3103.34
+N-0050,2025-06-21 00:00:00,Alimentação,StreamingFlix,Cartão de crédito,3043.05
+N-0051,2025-05-20 00:00:00,Alimentação,Livraria Cultura,Boleto,580.04
+N-0052,2026-02-22 00:00:00,Saúde,Clínica Saúde Total,Pix,1112.33
+N-0053,2026-03-08 00:00:00,Assinaturas,StreamingFlix,Pix,1273.65
+N-0054,2025-12-29 00:00:00,Transporte,StreamingFlix,Dinheiro,1850.13
+N-0055,2025-12-10 00:00:00,Transporte,Farmácia Popular,Dinheiro,2072.91
+N-0056,2026-03-31 00:00:00,Moradia,Clínica Saúde Total,Dinheiro,1050.87
+N-0057,2026-02-03 00:00:00,Educação,Academia Fit+,Dinheiro,1603.59
+N-0058,2025-08-24 00:00:00,Lazer,StreamingFlix,Pix,3932.55
+N-0059,2026-02-01 00:00:00,Serviços,StreamingFlix,Cartão de crédito,3922.58
+N-0060,2025-03-02 00:00:00,Alimentação,Mercado Bom Preço,Boleto,108.6
+S-0061,2025-02-05 00:00:00,Assinaturas,Clínica Saúde Total,Dinheiro,19289.41
+N-0062,2025-07-21 00:00:00,Alimentação,Restaurante Sabor & Arte,Cartão de débito,3997.33
+N-0063,2025-07-21 00:00:00,Saúde,Restaurante Sabor & Arte,Cartão de crédito,441.73
+N-0064,2025-01-06 00:00:00,Moradia,Posto Avenida,Pix,3758.52
+N-0065,2025-01-29 00:00:00,Serviços,StreamingFlix,Cartão de débito,1085.89
+N-0066,2025-07-10 00:00:00,Lazer,Academia Fit+,Pix,3400.28
+N-0067,2025-11-05 00:00:00,Moradia,Clínica Saúde Total,Cartão de débito,2735.84
+N-0068,2026-02-01 00:00:00,Alimentação,Hortifruti Verde Vida,Cartão de crédito,345.67
+N-0069,2025-12-15 00:00:00,Serviços,Mercado Bom Preço,Boleto,636.51
+N-0070,2025-10-26 00:00:00,Outros,EletroTech,Boleto,2525.82
+S-0071,2026-03-11 00:00:00,Outros,Loja Center,Dinheiro,21116.26
+N-0072,2025-11-24 00:00:00,Educação,Hortifruti Verde Vida,Boleto,1315.16
+N-0073,2025-05-26 00:00:00,Educação,Padaria Pão Quente,Dinheiro,2154.67
+N-0074,2025-02-21 00:00:00,Transporte,Padaria Pão Quente,Cartão de crédito,3544.25
+N-0075,2025-12-15 00:00:00,Assinaturas,Livraria Cultura,Pix,3989.37
+N-0076,2026-03-12 00:00:00,Lazer,Delivery Já,Cartão de crédito,2709.15
+S-0077,2025-03-19 00:00:00,Transporte,Farmácia Popular,Dinheiro,31270.73
+N-0078,2025-11-09 00:00:00,Transporte,Loja Center,Boleto,1205.62
+N-0079,2026-03-31 00:00:00,Outros,EletroTech,Cartão de crédito,3801.54
+N-0080,2026-02-20 00:00:00,Alimentação,EletroTech,Boleto,826.24
+N-0081,2025-04-18 00:00:00,Transporte,Livraria Cultura,Pix,1264.27
+N-0082,2025-08-18 00:00:00,Saúde,Padaria Pão Quente,Dinheiro,3196.06
+N-0083,2025-03-06 00:00:00,Transporte,Loja Center,Cartão de crédito,1335.82
+N-0084,2025-10-14 00:00:00,Saúde,StreamingFlix,Cartão de crédito,2485.61
+N-0085,2025-12-12 00:00:00,Serviços,Restaurante Sabor & Arte,Dinheiro,2298.57
+N-0086,2025-11-27 00:00:00,Lazer,Restaurante Sabor & Arte,Cartão de débito,2573.37
+N-0087,2025-06-20 00:00:00,Educação,Hortifruti Verde Vida,Pix,2161.9
+N-0088,2025-08-22 00:00:00,Outros,Delivery Já,Cartão de débito,2076.77
+N-0089,2026-02-13 00:00:00,Lazer,Academia Fit+,Cartão de débito,2995.12
+N-0090,2025-02-11 00:00:00,Moradia,Livraria Cultura,Cartão de crédito,1383.16
+N-0091,2025-03-15 00:00:00,Assinaturas,Restaurante Sabor & Arte,Pix,1337.77
+N-0092,2025-07-03 00:00:00,Educação,Hortifruti Verde Vida,Boleto,638.63
+S-0093,2026-02-01 00:00:00,Transporte,Clínica Saúde Total,Boleto,40907.68
+N-0094,2025-02-24 00:00:00,Moradia,Delivery Já,Pix,3351.94
+N-0095,2025-06-06 00:00:00,Moradia,Clínica Saúde Total,Pix,1256.12
+N-0096,2025-10-11 00:00:00,Saúde,EletroTech,Dinheiro,3763.88
+N-0097,2025-03-13 00:00:00,Lazer,Farmácia Popular,Dinheiro,1387.92
+N-0098,2025-12-31 00:00:00,Assinaturas,Oficina do Carro,Cartão de débito,1485.19
+N-0099,2025-03-14 00:00:00,Lazer,StreamingFlix,Pix,2534.38
+N-0100,2026-03-12 00:00:00,Vestuário,Posto Avenida,Dinheiro,68.81
+N-0101,2026-02-01 00:00:00,Vestuário,Loja Center,Dinheiro,1242.56
+N-0102,2025-11-30 00:00:00,Vestuário,Oficina do Carro,Boleto,2048.69
+S-0103,2026-03-06 00:00:00,Serviços,Academia Fit+,Pix,43737.78
+N-0104,2025-06-09 00:00:00,Vestuário,Padaria Pão Quente,Cartão de débito,3831.77
+N-0105,2025-01-28 00:00:00,Transporte,Oficina do Carro,Boleto,1988.19
+S-0106,2026-03-28 00:00:00,Transporte,Posto Avenida,Cartão de crédito,19921.23
+N-0107,2025-02-22 00:00:00,Educação,Livraria Cultura,Cartão de crédito,1915.54
+N-0108,2025-02-16 00:00:00,Vestuário,Delivery Já,Boleto,970.54
+N-0109,2025-03-24 00:00:00,Moradia,Delivery Já,Cartão de crédito,2219.69
+N-0110,2025-05-07 00:00:00,Educação,Livraria Cultura,Pix,2376.78
+S-0111,2025-09-17 00:00:00,Educação,Clínica Saúde Total,Boleto,32872.01
+N-0112,2025-07-09 00:00:00,Alimentação,Posto Avenida,Cartão de crédito,601.56
+N-0113,2026-02-02 00:00:00,Alimentação,Academia Fit+,Dinheiro,3727.04
+N-0114,2025-05-30 00:00:00,Vestuário,Restaurante Sabor & Arte,Dinheiro,1508.53
+N-0115,2025-01-28 00:00:00,Alimentação,Padaria Pão Quente,Dinheiro,224.26
+N-0116,2026-02-25 00:00:00,Assinaturas,Restaurante Sabor & Arte,Cartão de débito,74.91
+N-0117,2026-01-07 00:00:00,Lazer,StreamingFlix,Dinheiro,2987.74
+S-0118,2026-02-10 00:00:00,Moradia,Clínica Saúde Total,Cartão de crédito,33994.82
+N-0119,2026-01-13 00:00:00,Educação,Mercado Bom Preço,Pix,2457.28
+N-0120,2025-05-29 00:00:00,Serviços,StreamingFlix,Cartão de débito,70.62
+N-0121,2025-08-14 00:00:00,Moradia,Padaria Pão Quente,Boleto,1215.36
+N-0122,2026-03-15 00:00:00,Outros,Delivery Já,Pix,3675.78
+N-0123,2025-08-05 00:00:00,Alimentação,Farmácia Popular,Cartão de débito,1785.26
+N-0124,2025-07-07 00:00:00,Transporte,Clínica Saúde Total,Cartão de débito,1502.08
+N-0125,2025-02-08 00:00:00,Serviços,Delivery Já,Cartão de débito,358.84
+N-0126,2025-01-06 00:00:00,Moradia,Posto Avenida,Boleto,3770.86
+N-0127,2026-02-08 00:00:00,Assinaturas,Delivery Já,Boleto,2829.3
+N-0128,2025-06-28 00:00:00,Serviços,Clínica Saúde Total,Dinheiro,3864.41
+N-0129,2025-05-26 00:00:00,Moradia,Mercado Bom Preço,Boleto,2581.09
+N-0130,2025-03-22 00:00:00,Moradia,EletroTech,Pix,1589.75
+N-0131,2025-04-29 00:00:00,Saúde,Clínica Saúde Total,Boleto,2590.72
+N-0132,2025-05-26 00:00:00,Moradia,Clínica Saúde Total,Cartão de débito,2071.49
+N-0133,2025-12-06 00:00:00,Assinaturas,Posto Avenida,Dinheiro,3961.71
+N-0134,2025-04-06 00:00:00,Educação,Delivery Já,Cartão de débito,1291.59
+N-0135,2025-01-29 00:00:00,Transporte,Academia Fit+,Cartão de débito,963.4
+S-0136,2025-08-04 00:00:00,Educação,Farmácia Popular,Cartão de débito,20117.49
+N-0137,2025-04-17 00:00:00,Serviços,Hortifruti Verde Vida,Cartão de crédito,210.91
+N-0138,2025-03-16 00:00:00,Lazer,Oficina do Carro,Cartão de crédito,2042.27
+N-0139,2025-12-12 00:00:00,Serviços,Loja Center,Pix,1395.27
+N-0140,2025-03-19 00:00:00,Educação,Oficina do Carro,Dinheiro,3467.83
+N-0141,2025-04-17 00:00:00,Educação,Hortifruti Verde Vida,Pix,1891.99
+N-0142,2025-03-12 00:00:00,Alimentação,StreamingFlix,Dinheiro,1479.35
+N-0143,2025-11-10 00:00:00,Lazer,Padaria Pão Quente,Dinheiro,3488.7
+N-0144,2025-03-05 00:00:00,Transporte,Loja Center,Cartão de débito,1616.66
+N-0145,2025-09-24 00:00:00,Lazer,EletroTech,Dinheiro,1799.41
+N-0146,2025-03-24 00:00:00,Saúde,StreamingFlix,Dinheiro,792.56
+N-0147,2025-12-11 00:00:00,Transporte,Academia Fit+,Boleto,1140.3
+N-0148,2025-05-03 00:00:00,Alimentação,Academia Fit+,Pix,3549.65
+N-0149,2025-06-29 00:00:00,Outros,Mercado Bom Preço,Pix,1938.19
+N-0150,2026-01-06 00:00:00,Vestuário,Restaurante Sabor & Arte,Cartão de débito,1755.52
+N-0151,2025-02-13 00:00:00,Vestuário,Livraria Cultura,Dinheiro,3279.71
+S-0152,2025-07-21 00:00:00,Alimentação,Restaurante Sabor & Arte,Boleto,21841.07
+S-0153,2025-02-26 00:00:00,Serviços,EletroTech,Boleto,43037.89
+N-0154,2025-05-30 00:00:00,Transporte,Livraria Cultura,Dinheiro,3219.19
+N-0155,2025-05-29 00:00:00,Serviços,Clínica Saúde Total,Cartão de crédito,175.33
+N-0156,2025-08-10 00:00:00,Moradia,Oficina do Carro,Pix,1097.93
+N-0157,2025-03-10 00:00:00,Alimentação,Oficina do Carro,Cartão de crédito,2743.61
+N-0158,2025-07-20 00:00:00,Alimentação,Mercado Bom Preço,Boleto,1001.95
+S-0159,2025-11-07 00:00:00,Moradia,Restaurante Sabor & Arte,Cartão de débito,30828.86
+N-0160,2025-10-28 00:00:00,Transporte,Livraria Cultura,Cartão de débito,1817.65
+S-0161,2025-03-18 00:00:00,Lazer,Oficina do Carro,Boleto,34129.78
+N-0162,2025-12-20 00:00:00,Educação,Farmácia Popular,Dinheiro,3439.95
+N-0163,2025-08-18 00:00:00,Assinaturas,Livraria Cultura,Dinheiro,354.62
+N-0164,2025-11-14 00:00:00,Alimentação,Farmácia Popular,Pix,3282.22
+N-0165,2026-03-17 00:00:00,Serviços,Oficina do Carro,Boleto,2238.19
+N-0166,2025-04-12 00:00:00,Assinaturas,EletroTech,Cartão de crédito,2346.27
+N-0167,2025-09-01 00:00:00,Saúde,Mercado Bom Preço,Cartão de débito,538.09
+N-0168,2025-07-23 00:00:00,Educação,Farmácia Popular,Cartão de débito,2846.12
+N-0169,2026-01-18 00:00:00,Lazer,Hortifruti Verde Vida,Pix,2054.7
+N-0170,2025-10-14 00:00:00,Assinaturas,Livraria Cultura,Dinheiro,31.96
+S-0171,2025-09-04 00:00:00,Moradia,Restaurante Sabor & Arte,Dinheiro,37241.33
+N-0172,2026-03-09 00:00:00,Assinaturas,Academia Fit+,Cartão de débito,1342.64
+N-0173,2025-11-28 00:00:00,Vestuário,StreamingFlix,Cartão de crédito,3225.59
+N-0174,2025-03-05 00:00:00,Outros,Clínica Saúde Total,Boleto,3129.61
+N-0175,2026-01-13 00:00:00,Lazer,Padaria Pão Quente,Dinheiro,2064.55
+N-0176,2026-03-14 00:00:00,Moradia,Clínica Saúde Total,Dinheiro,3125.14
+N-0177,2025-07-31 00:00:00,Saúde,StreamingFlix,Boleto,1496.33
+N-0178,2025-03-07 00:00:00,Vestuário,EletroTech,Cartão de crédito,2437.14
+N-0179,2025-08-29 00:00:00,Lazer,StreamingFlix,Pix,25.91
+N-0180,2025-07-29 00:00:00,Outros,Restaurante Sabor & Arte,Cartão de crédito,1516.75
+N-0181,2025-07-22 00:00:00,Alimentação,EletroTech,Pix,898.83
+N-0182,2025-01-26 00:00:00,Moradia,Padaria Pão Quente,Boleto,635.97
+N-0183,2025-02-20 00:00:00,Alimentação,Livraria Cultura,Pix,173.81
+N-0184,2025-11-11 00:00:00,Saúde,EletroTech,Cartão de débito,3458.98
+N-0185,2026-02-11 00:00:00,Serviços,Hortifruti Verde Vida,Cartão de crédito,3343.35
+S-0186,2025-04-07 00:00:00,Serviços,Padaria Pão Quente,Cartão de débito,29330.75
+N-0187,2025-01-05 00:00:00,Moradia,Mercado Bom Preço,Cartão de débito,670.3
+N-0188,2025-09-16 00:00:00,Moradia,Posto Avenida,Pix,1342.31
+S-0189,2025-11-06 00:00:00,Saúde,Farmácia Popular,Cartão de crédito,20238.72
+N-0190,2025-05-02 00:00:00,Outros,Clínica Saúde Total,Cartão de débito,1160.55
+N-0191,2026-01-04 00:00:00,Educação,Academia Fit+,Pix,472.33
+N-0192,2026-01-09 00:00:00,Saúde,Delivery Já,Cartão de crédito,3439.0
+N-0193,2026-01-12 00:00:00,Transporte,StreamingFlix,Cartão de crédito,3066.71
+N-0194,2025-05-25 00:00:00,Educação,Farmácia Popular,Dinheiro,897.22
+N-0195,2025-07-17 00:00:00,Outros,Posto Avenida,Dinheiro,1721.04
+N-0196,2025-02-07 00:00:00,Educação,EletroTech,Dinheiro,1197.25
+N-0197,2026-01-10 00:00:00,Assinaturas,Farmácia Popular,Boleto,3795.59
+N-0198,2025-11-30 00:00:00,Educação,Delivery Já,Cartão de crédito,3396.68
+S-0199,2025-05-03 00:00:00,Alimentação,Padaria Pão Quente,Boleto,43512.47
+N-0200,2025-08-01 00:00:00,Saúde,Academia Fit+,Boleto,1126.59
+N-0201,2026-03-07 00:00:00,Transporte,Padaria Pão Quente,Cartão de débito,789.42
+N-0202,2025-03-13 00:00:00,Vestuário,EletroTech,Boleto,3849.91
+N-0203,2025-04-20 00:00:00,Outros,Mercado Bom Preço,Boleto,363.0
+N-0204,2025-06-18 00:00:00,Outros,Academia Fit+,Boleto,3489.96
+N-0205,2025-03-22 00:00:00,Serviços,Livraria Cultura,Pix,807.92
+N-0206,2026-03-29 00:00:00,Educação,Clínica Saúde Total,Dinheiro,2838.5
+N-0207,2026-03-04 00:00:00,Vestuário,Padaria Pão Quente,Pix,1053.3
+N-0208,2025-06-21 00:00:00,Educação,EletroTech,Dinheiro,2707.9
+N-0209,2025-08-19 00:00:00,Educação,Mercado Bom Preço,Pix,464.65
+N-0210,2026-01-07 00:00:00,Lazer,Oficina do Carro,Pix,1909.85
+N-0211,2026-02-14 00:00:00,Saúde,Oficina do Carro,Cartão de débito,2543.72
+N-0212,2026-02-23 00:00:00,Outros,EletroTech,Pix,401.19
+S-0213,2026-01-29 00:00:00,Serviços,Clínica Saúde Total,Cartão de débito,23160.37
+N-0214,2025-12-26 00:00:00,Lazer,Mercado Bom Preço,Boleto,2945.8
+N-0215,2026-02-22 00:00:00,Alimentação,Hortifruti Verde Vida,Cartão de crédito,3560.63
+N-0216,2026-02-12 00:00:00,Educação,EletroTech,Pix,2308.95
+N-0217,2025-09-15 00:00:00,Lazer,Loja Center,Cartão de crédito,1587.78
+N-0218,2025-12-03 00:00:00,Serviços,Mercado Bom Preço,Cartão de crédito,564.71
+N-0219,2025-03-05 00:00:00,Alimentação,Restaurante Sabor & Arte,Boleto,1751.82
+N-0220,2025-06-01 00:00:00,Assinaturas,Livraria Cultura,Pix,3206.81
+N-0221,2025-03-29 00:00:00,Outros,Restaurante Sabor & Arte,Pix,3170.84
+N-0222,2025-07-31 00:00:00,Educação,Loja Center,Dinheiro,431.26
+N-0223,2025-06-28 00:00:00,Assinaturas,StreamingFlix,Cartão de débito,1076.21
+S-0224,2026-02-15 00:00:00,Serviços,Padaria Pão Quente,Pix,40806.83
+N-0225,2025-08-04 00:00:00,Outros,Delivery Já,Pix,2211.68
+N-0226,2025-04-19 00:00:00,Transporte,StreamingFlix,Cartão de débito,3438.7
+N-0227,2025-04-16 00:00:00,Transporte,Padaria Pão Quente,Cartão de débito,143.36
+N-0228,2025-09-16 00:00:00,Lazer,Livraria Cultura,Pix,1472.22
+N-0229,2025-06-19 00:00:00,Assinaturas,StreamingFlix,Cartão de crédito,2289.41
+N-0230,2025-07-19 00:00:00,Alimentação,Oficina do Carro,Pix,3325.24
+N-0231,2025-04-06 00:00:00,Assinaturas,Oficina do Carro,Cartão de débito,3083.98
+N-0232,2026-03-25 00:00:00,Transporte,Hortifruti Verde Vida,Dinheiro,2038.64
+N-0233,2025-11-17 00:00:00,Alimentação,Padaria Pão Quente,Cartão de crédito,3694.27
+N-0234,2025-05-23 00:00:00,Saúde,Livraria Cultura,Pix,869.23
+N-0235,2025-08-22 00:00:00,Saúde,EletroTech,Cartão de crédito,2043.97
+N-0236,2025-03-29 00:00:00,Outros,StreamingFlix,Boleto,1168.51
+N-0237,2025-10-10 00:00:00,Transporte,Loja Center,Cartão de débito,1319.6
+N-0238,2026-03-18 00:00:00,Lazer,Livraria Cultura,Cartão de débito,3348.05
+S-0239,2025-10-02 00:00:00,Outros,Livraria Cultura,Boleto,30306.72
+N-0240,2026-02-07 00:00:00,Transporte,Clínica Saúde Total,Pix,3075.8
+N-0241,2025-10-16 00:00:00,Assinaturas,Oficina do Carro,Pix,1637.43
+N-0242,2025-02-04 00:00:00,Alimentação,StreamingFlix,Pix,2208.47
+N-0243,2025-04-02 00:00:00,Serviços,Farmácia Popular,Cartão de débito,1450.03
+N-0244,2025-04-04 00:00:00,Alimentação,Livraria Cultura,Pix,3995.4
+N-0245,2026-01-20 00:00:00,Serviços,Livraria Cultura,Cartão de débito,2082.55
+N-0246,2025-07-23 00:00:00,Saúde,Clínica Saúde Total,Boleto,2150.89
+N-0247,2025-03-28 00:00:00,Educação,Restaurante Sabor & Arte,Boleto,1585.34
+N-0248,2026-01-13 00:00:00,Transporte,Academia Fit+,Cartão de crédito,3914.14
+S-0249,2025-10-04 00:00:00,Outros,Loja Center,Dinheiro,29131.58
+N-0250,2025-12-31 00:00:00,Educação,Restaurante Sabor & Arte,Pix,1954.05
+N-0251,2026-02-19 00:00:00,Saúde,Posto Avenida,Boleto,207.9
+N-0252,2025-09-19 00:00:00,Lazer,Restaurante Sabor & Arte,Dinheiro,131.53
+N-0253,2025-05-13 00:00:00,Transporte,Oficina do Carro,Pix,3802.13
+N-0254,2025-07-04 00:00:00,Saúde,Loja Center,Dinheiro,448.12
+N-0255,2025-05-05 00:00:00,Serviços,Oficina do Carro,Dinheiro,3463.13
+N-0256,2026-02-12 00:00:00,Alimentação,Clínica Saúde Total,Cartão de débito,870.1
+N-0257,2025-05-05 00:00:00,Alimentação,Oficina do Carro,Cartão de débito,767.69
+S-0258,2026-01-20 00:00:00,Outros,Clínica Saúde Total,Pix,43839.04
+N-0259,2025-08-15 00:00:00,Alimentação,Livraria Cultura,Cartão de crédito,1965.58
+S-0260,2025-11-15 00:00:00,Moradia,Academia Fit+,Cartão de crédito,31308.71
+N-0261,2025-05-19 00:00:00,Outros,Farmácia Popular,Boleto,541.29
+N-0262,2025-02-22 00:00:00,Serviços,Delivery Já,Dinheiro,3236.62
+N-0263,2025-09-21 00:00:00,Lazer,EletroTech,Boleto,1420.33
+N-0264,2025-07-05 00:00:00,Lazer,Delivery Já,Boleto,2071.12
+N-0265,2025-10-26 00:00:00,Serviços,Oficina do Carro,Cartão de crédito,858.34
+N-0266,2025-04-20 00:00:00,Alimentação,Posto Avenida,Boleto,2063.02
+N-0267,2025-01-28 00:00:00,Transporte,Posto Avenida,Cartão de débito,2177.1
+N-0268,2026-02-07 00:00:00,Alimentação,Posto Avenida,Cartão de débito,3699.8
+N-0269,2025-03-09 00:00:00,Outros,Mercado Bom Preço,Cartão de débito,1831.1
+N-0270,2025-03-09 00:00:00,Assinaturas,Livraria Cultura,Pix,3468.54
+N-0271,2025-10-15 00:00:00,Educação,Loja Center,Cartão de débito,260.49
+N-0272,2025-10-12 00:00:00,Alimentação,Padaria Pão Quente,Cartão de débito,3873.39
+S-0273,2025-04-30 00:00:00,Assinaturas,Restaurante Sabor & Arte,Pix,40111.0
+N-0274,2026-03-10 00:00:00,Alimentação,Clínica Saúde Total,Cartão de crédito,420.26
+N-0275,2025-03-26 00:00:00,Transporte,Loja Center,Cartão de crédito,1883.7
+N-0276,2025-09-18 00:00:00,Moradia,Mercado Bom Preço,Pix,1995.28
+N-0277,2025-02-04 00:00:00,Vestuário,Livraria Cultura,Pix,61.08
+N-0278,2025-08-20 00:00:00,Serviços,Posto Avenida,Pix,1131.93
+N-0279,2025-12-26 00:00:00,Lazer,Padaria Pão Quente,Cartão de crédito,3088.21
+N-0280,2025-04-16 00:00:00,Vestuário,Farmácia Popular,Cartão de débito,657.58
+N-0281,2025-03-26 00:00:00,Educação,Livraria Cultura,Cartão de crédito,2182.96
+N-0282,2025-11-28 00:00:00,Transporte,Oficina do Carro,Dinheiro,3531.73
+N-0283,2025-03-20 00:00:00,Vestuário,Farmácia Popular,Pix,2601.98
+N-0284,2025-04-18 00:00:00,Saúde,Padaria Pão Quente,Cartão de crédito,685.09
+N-0285,2025-06-30 00:00:00,Outros,Oficina do Carro,Dinheiro,1257.03
+N-0286,2025-03-11 00:00:00,Lazer,Delivery Já,Cartão de crédito,519.43
+N-0287,2025-06-05 00:00:00,Vestuário,Oficina do Carro,Boleto,3045.46
+S-0288,2025-07-09 00:00:00,Lazer,Padaria Pão Quente,Cartão de débito,44798.94
+N-0289,2025-10-02 00:00:00,Alimentação,Padaria Pão Quente,Cartão de débito,468.7
+N-0290,2025-01-31 00:00:00,Lazer,Oficina do Carro,Cartão de débito,1259.34
+N-0291,2025-08-15 00:00:00,Saúde,Padaria Pão Quente,Cartão de crédito,3351.88
+N-0292,2026-02-19 00:00:00,Outros,Academia Fit+,Dinheiro,1124.58
+S-0293,2025-03-30 00:00:00,Transporte,Oficina do Carro,Dinheiro,27941.48
+N-0294,2025-05-14 00:00:00,Assinaturas,Livraria Cultura,Dinheiro,925.21
+N-0295,2026-01-25 00:00:00,Serviços,Posto Avenida,Dinheiro,473.93
+N-0296,2025-03-01 00:00:00,Educação,Restaurante Sabor & Arte,Cartão de crédito,2192.46
+N-0297,2026-01-19 00:00:00,Moradia,Loja Center,Cartão de débito,83.77
+N-0298,2025-01-06 00:00:00,Educação,Restaurante Sabor & Arte,Boleto,1895.05
+N-0299,2025-07-23 00:00:00,Serviços,Livraria Cultura,Pix,329.68
+N-0300,2025-02-26 00:00:00,Transporte,Hortifruti Verde Vida,Dinheiro,2182.26
+N-0301,2025-11-17 00:00:00,Outros,Clínica Saúde Total,Cartão de crédito,1531.24
+N-0302,2025-02-07 00:00:00,Assinaturas,Clínica Saúde Total,Cartão de débito,1175.24
+N-0303,2025-05-15 00:00:00,Saúde,Restaurante Sabor & Arte,Dinheiro,3976.5
+N-0304,2025-10-04 00:00:00,Educação,StreamingFlix,Dinheiro,818.02
+N-0305,2025-04-01 00:00:00,Educação,Farmácia Popular,Boleto,1103.52
+N-0306,2025-02-01 00:00:00,Moradia,Clínica Saúde Total,Dinheiro,501.69
+N-0307,2025-01-05 00:00:00,Saúde,Clínica Saúde Total,Boleto,3961.08
+N-0308,2025-07-04 00:00:00,Assinaturas,Hortifruti Verde Vida,Cartão de crédito,2211.25
+N-0309,2026-01-29 00:00:00,Outros,Farmácia Popular,Cartão de débito,3624.93
+N-0310,2026-03-17 00:00:00,Transporte,Clínica Saúde Total,Pix,2041.44
+N-0311,2025-12-16 00:00:00,Vestuário,Posto Avenida,Cartão de crédito,2359.4
+N-0312,2026-03-04 00:00:00,Saúde,Clínica Saúde Total,Pix,2997.49
+N-0313,2025-05-17 00:00:00,Saúde,Delivery Já,Pix,699.18
+N-0314,2025-09-11 00:00:00,Moradia,Hortifruti Verde Vida,Cartão de débito,1108.71
+N-0315,2025-03-26 00:00:00,Vestuário,Delivery Já,Cartão de crédito,382.81
+N-0316,2025-09-28 00:00:00,Moradia,Farmácia Popular,Cartão de crédito,2321.37
+N-0317,2025-06-29 00:00:00,Alimentação,Farmácia Popular,Dinheiro,3512.72
+N-0318,2025-10-15 00:00:00,Vestuário,Loja Center,Cartão de débito,2423.24
+N-0319,2025-04-11 00:00:00,Vestuário,Academia Fit+,Cartão de crédito,3570.23
+N-0320,2025-11-27 00:00:00,Outros,Hortifruti Verde Vida,Cartão de crédito,1380.11
+N-0321,2025-09-02 00:00:00,Assinaturas,StreamingFlix,Cartão de crédito,2353.3
+N-0322,2025-09-01 00:00:00,Outros,StreamingFlix,Pix,3328.62
+N-0323,2025-08-18 00:00:00,Transporte,Farmácia Popular,Dinheiro,1125.4
+N-0324,2025-11-01 00:00:00,Serviços,Mercado Bom Preço,Pix,704.31
+N-0325,2025-02-13 00:00:00,Assinaturas,Academia Fit+,Boleto,1807.07
+N-0326,2025-10-31 00:00:00,Transporte,Mercado Bom Preço,Dinheiro,3550.32
+N-0327,2025-04-14 00:00:00,Educação,Farmácia Popular,Cartão de débito,807.81
+N-0328,2025-07-11 00:00:00,Alimentação,StreamingFlix,Pix,63.38
+N-0329,2025-12-27 00:00:00,Transporte,Delivery Já,Pix,32.26
+N-0330,2025-12-04 00:00:00,Assinaturas,Loja Center,Cartão de débito,1452.13
+N-0331,2025-12-24 00:00:00,Moradia,Loja Center,Pix,3389.38
+N-0332,2025-05-11 00:00:00,Educação,Loja Center,Dinheiro,2021.77
+N-0333,2025-02-22 00:00:00,Outros,Oficina do Carro,Pix,1577.28
+N-0334,2026-03-17 00:00:00,Assinaturas,Loja Center,Cartão de crédito,3688.89
+N-0335,2025-05-12 00:00:00,Alimentação,Mercado Bom Preço,Cartão de crédito,3623.93
+S-0336,2025-06-09 00:00:00,Vestuário,Padaria Pão Quente,Pix,26594.6
+N-0337,2025-07-20 00:00:00,Transporte,Padaria Pão Quente,Pix,3802.04
+N-0338,2025-03-03 00:00:00,Outros,Posto Avenida,Pix,3090.56
+N-0339,2025-05-26 00:00:00,Moradia,EletroTech,Pix,1635.95
+N-0340,2025-07-03 00:00:00,Assinaturas,Farmácia Popular,Boleto,2495.35
+N-0341,2025-06-24 00:00:00,Saúde,Academia Fit+,Cartão de crédito,424.41
+N-0342,2026-01-16 00:00:00,Vestuário,Hortifruti Verde Vida,Cartão de débito,888.93
+N-0343,2025-03-04 00:00:00,Serviços,Loja Center,Boleto,2356.6
+N-0344,2025-03-05 00:00:00,Lazer,Academia Fit+,Dinheiro,1192.72
+N-0345,2025-07-24 00:00:00,Alimentação,Hortifruti Verde Vida,Dinheiro,3465.24
+N-0346,2025-01-12 00:00:00,Lazer,EletroTech,Pix,263.56
+N-0347,2025-04-19 00:00:00,Alimentação,Restaurante Sabor & Arte,Pix,3118.65
+N-0348,2025-06-21 00:00:00,Assinaturas,Academia Fit+,Boleto,3372.33
+N-0349,2025-03-19 00:00:00,Moradia,Farmácia Popular,Boleto,3534.82
+N-0350,2026-03-15 00:00:00,Outros,Delivery Já,Cartão de débito,3801.15
+S-0351,2026-03-29 00:00:00,Lazer,Restaurante Sabor & Arte,Pix,22050.43
+S-0352,2026-01-10 00:00:00,Serviços,EletroTech,Boleto,36536.8
+N-0353,2025-10-20 00:00:00,Educação,Farmácia Popular,Dinheiro,2949.73
+N-0354,2025-01-06 00:00:00,Transporte,Farmácia Popular,Cartão de crédito,3225.06
+N-0355,2025-07-13 00:00:00,Vestuário,Oficina do Carro,Boleto,3438.34
+N-0356,2026-02-21 00:00:00,Lazer,Loja Center,Pix,2691.45
+N-0357,2025-08-01 00:00:00,Outros,Livraria Cultura,Cartão de crédito,1067.14
+N-0358,2025-07-31 00:00:00,Serviços,EletroTech,Dinheiro,988.94
+N-0359,2025-02-01 00:00:00,Lazer,Oficina do Carro,Boleto,3735.63
+N-0360,2025-11-19 00:00:00,Alimentação,Posto Avenida,Cartão de débito,2224.49
+N-0361,2025-07-20 00:00:00,Lazer,Clínica Saúde Total,Cartão de débito,2225.58
+N-0362,2026-03-16 00:00:00,Assinaturas,StreamingFlix,Dinheiro,337.84
+S-0363,2025-05-30 00:00:00,Lazer,Academia Fit+,Dinheiro,26495.9
+N-0364,2026-03-22 00:00:00,Outros,Clínica Saúde Total,Cartão de crédito,2786.37
+S-0365,2025-05-25 00:00:00,Assinaturas,Livraria Cultura,Pix,33864.92
+S-0366,2025-09-04 00:00:00,Lazer,EletroTech,Dinheiro,34834.45
+N-0367,2025-05-26 00:00:00,Alimentação,Restaurante Sabor & Arte,Pix,2461.98
+N-0368,2025-03-15 00:00:00,Educação,Posto Avenida,Boleto,538.42
+N-0369,2025-07-02 00:00:00,Serviços,Clínica Saúde Total,Pix,3500.85
+N-0370,2025-07-21 00:00:00,Transporte,Clínica Saúde Total,Cartão de crédito,1676.37
+N-0371,2025-08-27 00:00:00,Moradia,Farmácia Popular,Dinheiro,492.09
+N-0372,2025-12-31 00:00:00,Educação,Padaria Pão Quente,Cartão de débito,2521.82
+N-0373,2025-05-12 00:00:00,Transporte,Farmácia Popular,Cartão de débito,1278.24
+N-0374,2025-06-26 00:00:00,Moradia,EletroTech,Cartão de débito,2732.58
+N-0375,2025-09-10 00:00:00,Transporte,Loja Center,Boleto,2982.33
+N-0376,2025-03-31 00:00:00,Educação,Oficina do Carro,Cartão de crédito,3191.94
+N-0377,2025-06-25 00:00:00,Lazer,EletroTech,Dinheiro,2120.48
+N-0378,2025-07-02 00:00:00,Transporte,StreamingFlix,Cartão de crédito,2678.48
+N-0379,2025-07-08 00:00:00,Saúde,Clínica Saúde Total,Cartão de débito,3963.7
+N-0380,2026-03-31 00:00:00,Outros,StreamingFlix,Boleto,971.38
+N-0381,2025-08-29 00:00:00,Saúde,Clínica Saúde Total,Pix,1528.36
+N-0382,2025-05-18 00:00:00,Saúde,Clínica Saúde Total,Cartão de débito,2965.41
+N-0383,2025-08-22 00:00:00,Transporte,Farmácia Popular,Boleto,3747.97
+N-0384,2025-02-26 00:00:00,Alimentação,EletroTech,Cartão de débito,3646.19
+N-0385,2025-10-19 00:00:00,Alimentação,Padaria Pão Quente,Pix,2454.48
+N-0386,2025-08-23 00:00:00,Lazer,Posto Avenida,Cartão de crédito,3934.51
+N-0387,2025-04-18 00:00:00,Outros,Livraria Cultura,Cartão de débito,3920.1
+N-0388,2026-01-23 00:00:00,Moradia,Restaurante Sabor & Arte,Dinheiro,1628.14
+N-0389,2026-01-17 00:00:00,Lazer,StreamingFlix,Cartão de débito,3063.29
+N-0390,2026-01-13 00:00:00,Alimentação,Restaurante Sabor & Arte,Cartão de crédito,989.6
+N-0391,2025-08-19 00:00:00,Saúde,Farmácia Popular,Cartão de crédito,2214.52
+N-0392,2025-05-29 00:00:00,Assinaturas,Hortifruti Verde Vida,Dinheiro,2989.07
+N-0393,2025-01-24 00:00:00,Vestuário,Delivery Já,Dinheiro,3789.06
+N-0394,2026-01-22 00:00:00,Outros,Oficina do Carro,Pix,2769.97
+N-0395,2026-01-29 00:00:00,Lazer,Farmácia Popular,Dinheiro,2385.69
+N-0396,2025-03-23 00:00:00,Educação,Academia Fit+,Dinheiro,3414.56
+N-0397,2025-06-04 00:00:00,Alimentação,Restaurante Sabor & Arte,Cartão de débito,1856.75
+N-0398,2025-09-03 00:00:00,Moradia,Academia Fit+,Cartão de débito,2819.36
+N-0399,2026-02-24 00:00:00,Saúde,Oficina do Carro,Cartão de débito,3787.89
+N-0400,2026-02-12 00:00:00,Lazer,Oficina do Carro,Cartão de crédito,3223.03
+S-0401,2025-03-14 00:00:00,Assinaturas,Loja Center,Cartão de débito,21635.46
+S-0402,2026-02-12 00:00:00,Vestuário,StreamingFlix,Pix,31400.6
+N-0403,2025-02-04 00:00:00,Alimentação,Academia Fit+,Cartão de crédito,1145.1
+N-0404,2025-02-23 00:00:00,Vestuário,StreamingFlix,Boleto,2872.53
+N-0405,2025-03-13 00:00:00,Serviços,Mercado Bom Preço,Dinheiro,793.69
+N-0406,2025-08-14 00:00:00,Serviços,Padaria Pão Quente,Cartão de crédito,3799.98
+N-0407,2025-06-01 00:00:00,Saúde,Padaria Pão Quente,Boleto,2851.52
+N-0408,2025-08-01 00:00:00,Outros,Loja Center,Pix,1700.21
+N-0409,2026-02-04 00:00:00,Saúde,Livraria Cultura,Cartão de débito,894.06
+N-0410,2025-05-04 00:00:00,Vestuário,Clínica Saúde Total,Cartão de crédito,1537.62
+N-0411,2026-01-08 00:00:00,Transporte,Clínica Saúde Total,Cartão de crédito,2773.18
+N-0412,2025-06-30 00:00:00,Lazer,Loja Center,Dinheiro,2669.55
+N-0413,2026-03-09 00:00:00,Vestuário,StreamingFlix,Dinheiro,3459.08
+S-0414,2025-08-20 00:00:00,Serviços,Loja Center,Cartão de crédito,32413.21
+N-0415,2026-02-24 00:00:00,Vestuário,Farmácia Popular,Dinheiro,3891.64
+N-0416,2025-12-08 00:00:00,Vestuário,Restaurante Sabor & Arte,Cartão de crédito,1456.27
+N-0417,2026-02-13 00:00:00,Serviços,Livraria Cultura,Boleto,932.75
+S-0418,2025-12-04 00:00:00,Vestuário,EletroTech,Pix,20771.57
+N-0419,2025-07-31 00:00:00,Outros,Delivery Já,Cartão de crédito,1723.86
+N-0420,2025-05-27 00:00:00,Assinaturas,Livraria Cultura,Dinheiro,3969.52
+N-0421,2025-11-27 00:00:00,Assinaturas,Hortifruti Verde Vida,Cartão de crédito,2789.17
+N-0422,2026-01-09 00:00:00,Lazer,Padaria Pão Quente,Cartão de crédito,2342.86
+N-0423,2025-05-21 00:00:00,Moradia,Academia Fit+,Pix,2444.12
+N-0424,2025-06-19 00:00:00,Alimentação,Clínica Saúde Total,Pix,255.18
+N-0425,2025-02-11 00:00:00,Outros,Farmácia Popular,Cartão de débito,2569.46
+N-0426,2025-01-24 00:00:00,Lazer,Loja Center,Cartão de crédito,1137.27
+N-0427,2025-04-15 00:00:00,Serviços,Livraria Cultura,Cartão de débito,67.93
+N-0428,2026-01-04 00:00:00,Moradia,Delivery Já,Boleto,1702.67
+S-0429,2025-06-10 00:00:00,Lazer,EletroTech,Dinheiro,36068.15
+N-0430,2025-10-18 00:00:00,Transporte,EletroTech,Pix,3011.85
+N-0431,2026-03-09 00:00:00,Vestuário,Loja Center,Cartão de crédito,2811.73
+N-0432,2026-01-31 00:00:00,Outros,Mercado Bom Preço,Boleto,1946.21
+N-0433,2026-02-14 00:00:00,Vestuário,EletroTech,Boleto,3798.05
+S-0434,2025-07-03 00:00:00,Serviços,Oficina do Carro,Cartão de débito,21326.15
+N-0435,2025-01-23 00:00:00,Saúde,Livraria Cultura,Dinheiro,2296.83
+N-0436,2025-05-23 00:00:00,Outros,Hortifruti Verde Vida,Boleto,2352.09
+N-0437,2025-10-07 00:00:00,Serviços,Posto Avenida,Cartão de crédito,2543.32
+N-0438,2025-07-31 00:00:00,Educação,Restaurante Sabor & Arte,Cartão de débito,655.69
+N-0439,2025-09-24 00:00:00,Vestuário,Oficina do Carro,Dinheiro,600.6
+N-0440,2025-06-05 00:00:00,Outros,Farmácia Popular,Cartão de débito,2910.5
+N-0441,2026-02-09 00:00:00,Alimentação,EletroTech,Dinheiro,2825.8
+S-0442,2025-02-10 00:00:00,Serviços,Posto Avenida,Boleto,35824.79
+N-0443,2025-08-08 00:00:00,Vestuário,Restaurante Sabor & Arte,Cartão de crédito,1947.8
+N-0444,2025-11-11 00:00:00,Assinaturas,EletroTech,Pix,1003.99
+N-0445,2025-05-13 00:00:00,Serviços,Livraria Cultura,Cartão de débito,3078.66
+N-0446,2025-02-22 00:00:00,Outros,Oficina do Carro,Boleto,1806.5
+N-0447,2025-12-06 00:00:00,Serviços,Posto Avenida,Dinheiro,2803.18
+N-0448,2025-09-02 00:00:00,Serviços,Oficina do Carro,Dinheiro,3334.98
+S-0449,2026-02-28 00:00:00,Outros,Posto Avenida,Cartão de débito,43264.31
+N-0450,2025-09-07 00:00:00,Outros,Restaurante Sabor & Arte,Cartão de crédito,1177.12
+N-0451,2025-08-24 00:00:00,Outros,Padaria Pão Quente,Boleto,3544.08
+N-0452,2025-07-30 00:00:00,Vestuário,Hortifruti Verde Vida,Dinheiro,1447.8
+N-0453,2026-01-15 00:00:00,Serviços,Livraria Cultura,Cartão de débito,1324.59
+N-0454,2025-11-07 00:00:00,Outros,Oficina do Carro,Cartão de crédito,2212.24
+N-0455,2025-01-31 00:00:00,Educação,Posto Avenida,Cartão de crédito,1993.76
+N-0456,2025-05-10 00:00:00,Vestuário,Oficina do Carro,Boleto,838.66
+N-0457,2025-10-18 00:00:00,Assinaturas,Academia Fit+,Pix,942.14
+S-0458,2026-03-24 00:00:00,Educação,Farmácia Popular,Cartão de crédito,40314.99
+N-0459,2025-01-30 00:00:00,Moradia,Oficina do Carro,Cartão de crédito,965.12
+N-0460,2026-01-10 00:00:00,Alimentação,Academia Fit+,Cartão de crédito,1871.45
+N-0461,2025-11-09 00:00:00,Outros,Clínica Saúde Total,Pix,3311.5
+S-0462,2025-05-29 00:00:00,Moradia,Farmácia Popular,Boleto,36292.38
+N-0463,2025-09-11 00:00:00,Serviços,Posto Avenida,Pix,2649.76
+N-0464,2026-01-08 00:00:00,Moradia,Oficina do Carro,Cartão de crédito,2811.04
+N-0465,2025-12-17 00:00:00,Transporte,Academia Fit+,Cartão de crédito,1938.27
+N-0466,2025-12-19 00:00:00,Educação,StreamingFlix,Cartão de crédito,3264.93
+N-0467,2025-05-05 00:00:00,Serviços,Academia Fit+,Cartão de crédito,2473.66
+N-0468,2025-08-31 00:00:00,Outros,Clínica Saúde Total,Boleto,432.55
+N-0469,2026-03-04 00:00:00,Lazer,Loja Center,Pix,3857.93
+N-0470,2026-02-21 00:00:00,Assinaturas,Loja Center,Boleto,3111.58
+N-0471,2025-02-05 00:00:00,Assinaturas,Hortifruti Verde Vida,Pix,3029.54
+S-0472,2025-12-12 00:00:00,Assinaturas,EletroTech,Dinheiro,35240.6
+N-0473,2026-03-14 00:00:00,Assinaturas,Hortifruti Verde Vida,Cartão de crédito,2136.45
+N-0474,2026-02-16 00:00:00,Serviços,Farmácia Popular,Cartão de crédito,1148.87
+N-0475,2025-07-27 00:00:00,Assinaturas,Loja Center,Dinheiro,2587.21
+N-0476,2025-05-08 00:00:00,Serviços,Academia Fit+,Cartão de débito,796.24
+N-0477,2025-07-18 00:00:00,Vestuário,Loja Center,Cartão de débito,375.67
+N-0478,2025-03-14 00:00:00,Alimentação,Farmácia Popular,Dinheiro,709.29
+N-0479,2025-04-07 00:00:00,Moradia,Academia Fit+,Pix,2747.45
+N-0480,2025-11-01 00:00:00,Transporte,StreamingFlix,Cartão de crédito,3320.37
+N-0481,2026-03-22 00:00:00,Serviços,Delivery Já,Pix,1752.03
+N-0482,2025-03-01 00:00:00,Vestuário,EletroTech,Boleto,1151.15
+N-0483,2025-10-18 00:00:00,Moradia,EletroTech,Boleto,2705.69
+N-0484,2025-05-03 00:00:00,Educação,Posto Avenida,Cartão de crédito,628.13
+N-0485,2025-05-09 00:00:00,Assinaturas,Oficina do Carro,Pix,1698.05
+N-0486,2025-04-16 00:00:00,Alimentação,Delivery Já,Cartão de débito,646.75
+N-0487,2025-12-28 00:00:00,Alimentação,Academia Fit+,Cartão de débito,3305.96
+N-0488,2026-02-10 00:00:00,Lazer,Livraria Cultura,Boleto,3046.44
+S-0489,2025-08-07 00:00:00,Saúde,Clínica Saúde Total,Boleto,43066.57
+N-0490,2026-01-05 00:00:00,Transporte,Restaurante Sabor & Arte,Dinheiro,2276.06
+N-0491,2025-09-21 00:00:00,Serviços,Academia Fit+,Cartão de débito,1676.56
+N-0492,2026-01-19 00:00:00,Assinaturas,Padaria Pão Quente,Pix,3672.87
+N-0493,2025-04-22 00:00:00,Saúde,Clínica Saúde Total,Cartão de débito,2358.87
+N-0494,2025-05-05 00:00:00,Transporte,Academia Fit+,Cartão de crédito,398.93
+N-0495,2025-01-15 00:00:00,Lazer,Padaria Pão Quente,Cartão de débito,230.66
+S-0496,2025-08-02 00:00:00,Assinaturas,Academia Fit+,Boleto,26320.62
+N-0497,2025-02-12 00:00:00,Transporte,Hortifruti Verde Vida,Boleto,247.28
+N-0498,2025-03-23 00:00:00,Outros,Livraria Cultura,Cartão de crédito,594.06
+N-0499,2025-02-10 00:00:00,Lazer,Academia Fit+,Pix,1032.33
+N-0500,2026-03-11 00:00:00,Transporte,Hortifruti Verde Vida,Cartão de crédito,2806.37

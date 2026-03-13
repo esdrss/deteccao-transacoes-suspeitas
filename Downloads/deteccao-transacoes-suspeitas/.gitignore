@@ -1,9 +1,0 @@
-__pycache__/
-*.pyc
-.env
-.venv/
-venv/
-# armazenamento local do CRUD
-data/
-results/
-datasets.json
