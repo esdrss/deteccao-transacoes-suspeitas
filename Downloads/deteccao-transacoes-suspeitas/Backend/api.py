@@ -99,7 +99,7 @@ def _read_dataframe_from_path(path: Path) -> pd.DataFrame:
 
 def _coerce_numeric_series(df: pd.DataFrame, column: str) -> pd.Series:
     if column not in df.columns:
-        raise ValueError(f"A planilha precisa ter uma coluna chamada '{column}'.")
+        raise ValueError(f"ERR_MISSING_COLUMN|{column}")
     s = pd.to_numeric(df[column], errors="coerce")
     s = s.dropna()
     return s
@@ -118,7 +118,7 @@ def _mean_std_streaming_csv(path: Path, column: str, chunksize: int = 200_000) -
     for chunk in pd.read_csv(path, chunksize=chunksize):
         _normalize_columns(chunk)
         if column not in chunk.columns:
-            raise ValueError(f"A planilha precisa ter uma coluna chamada '{column}'.")
+            raise ValueError(f"ERR_MISSING_COLUMN|{column}")
         vals = _coerce_ptbr_numeric(chunk[column]).dropna().tolist()
         for x in vals:
             n += 1
@@ -128,7 +128,7 @@ def _mean_std_streaming_csv(path: Path, column: str, chunksize: int = 200_000) -
             m2 += delta * delta2
 
     if n < 2:
-        raise ValueError("Poucos dados na coluna para calcular desvio padrão.")
+        raise ValueError("ERR_FEW_DATA_STD")
 
     var = m2 / (n - 1)
     std = math.sqrt(var) if var > 0 else 0.0
@@ -155,7 +155,7 @@ def _analyze_df(df: pd.DataFrame, req: AnalyzeRequest) -> Dict[str, Any]:
     col = (req.column or "").strip().lower()
     series = _coerce_numeric_series(df, col)
     if len(series) < 2:
-        raise ValueError(f"Poucos dados na coluna '{col}' para calcular estatísticas.")
+        raise ValueError(f"ERR_FEW_DATA|{col}")
 
     method = req.method
     direction = req.direction
@@ -333,7 +333,7 @@ def _analyze_path(path: Path, req: AnalyzeRequest) -> Dict[str, Any]:
         for chunk in pd.read_csv(path, chunksize=chunksize):
             _normalize_columns(chunk)
             if col not in chunk.columns:
-                raise ValueError(f"A planilha precisa ter uma coluna chamada '{col}'.")
+                raise ValueError(f"ERR_MISSING_COLUMN|{col}")
             chunk[col] = _coerce_ptbr_numeric(chunk[col])
             chunk = chunk.dropna(subset=[col])
             mask = _threshold_mask(chunk[col], thresholds.get("lower"), thresholds.get("upper"))

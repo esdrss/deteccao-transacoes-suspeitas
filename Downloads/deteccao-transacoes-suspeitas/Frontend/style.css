@@ -20,6 +20,12 @@
   --radius-sm: 12px;
   --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --card-border: rgba(255, 255, 255, 0.05);
+
+  --btn2-bg: rgba(17, 24, 39, 0.75);
+  --btn2-text: #ffffff;
+  --btn2-border: rgba(255, 255, 255, 0.14);
+  --btn2-hover: rgba(30, 41, 59, 0.9);
 }
 
 [data-theme="light"] {
@@ -39,6 +45,14 @@
 
   --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.03);
+
+  --card: #f8fafc;
+  --card-border: #e2e8f0;
+
+  --btn2-bg: #ffffff;
+  --btn2-text: #334155;
+  --btn2-border: #cbd5e1;
+  --btn2-hover: #f1f5f9;
 }
 
 body {
@@ -259,13 +273,13 @@ button:disabled {
 }
 
 .btn2 {
-  background: rgba(17, 24, 39, 0.75);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--btn2-bg);
+  color: var(--btn2-text);
+  border: 1px solid var(--btn2-border);
 }
 
 .btn2:hover {
-  filter: brightness(1.08);
+  background: var(--btn2-hover);
 }
 
 .danger {
@@ -392,6 +406,7 @@ code {
   padding: 14px;
   border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
+  border: 1px solid var(--card-border);
 }
 
 .card h3 {
@@ -444,7 +459,7 @@ a {
 
 footer {
   margin-top: 18px;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--muted);
   font-size: 12px;
   text-align: center;
 }
