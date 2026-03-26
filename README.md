@@ -97,7 +97,3 @@ Abra o seu navegador favorito e acesse:
 Desenvolvido com dedicação por:
 
     Débora Ribeiro, Esdras Vitor, Tiago Lucas
-
-    Esdras Vitor
-
-    Tiago Lucas
