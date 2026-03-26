@@ -14,35 +14,57 @@
   <div class="container">
     <header>
       <div>
-        <h1 class="title">Detecção de Transações Suspeitas</h1>
+        <h1 class="title" data-i18n="title">Detecção de Transações Suspeitas</h1>
       </div>
-      <button id="btnThemeToggle" class="btn2 btn-sm"
-        style="border-radius: 999px; display: flex; align-items: center; gap: 6px;">
-        <span id="themeIcon">☀️</span> Tema Claro
-      </button>
+
+      <div style="display: flex; gap: 8px; align-items: center;">
+
+        <select id="langSelect" class="btn2 btn-sm"
+          style="width: auto; height: 36px; padding: 0 12px; border-radius: 999px; cursor: pointer; margin: 0; box-sizing: border-box;">
+          <option value="pt">🇧🇷 PT</option>
+          <option value="en">🇺🇸 EN</option>
+          <option value="es">🇪🇸 ES</option>
+        </select>
+
+        <button id="btnThemeToggle" class="btn2 btn-sm"
+          style="height: 36px; padding: 0 16px; border-radius: 999px; display: flex; align-items: center; gap: 6px; margin: 0; box-sizing: border-box;">
+          <span id="themeIcon">☀️</span> <span id="themeText" data-i18n="themeLight">Tema Claro</span>
+        </button>
+
+      </div>
     </header>
 
     <div class="grid">
       <section class="panel">
-        <h2> Enviar Arquivo </h2>
+        <h2 data-i18n="secUpload"> Enviar Arquivo </h2>
 
         <div class="form-grid">
           <div class="field">
-            <label for="dsName">Nome da base de dados (opcional)</label>
-            <input id="dsName" type="text" placeholder="Ex.: Semana 02 - Pagamentos" />
+            <label for="dsName" data-i18n="labelName">Nome da base de dados (opcional)</label>
+            <input id="dsName" type="text" placeholder="Ex.: Semana 02 - Pagamentos"
+              data-i18n-placeholder="placeholderName" />
           </div>
 
           <div class="field">
-            <label for="dsFile">Arquivo (.csv, .xlsx, .xls)</label>
-            <input id="dsFile" type="file" accept=".csv,.xlsx,.xls" />
-          </div>
+            <label for="dsFile" data-i18n="labelFile">Arquivo (.csv, .xlsx, .xls)</label>
+            <input id="dsFile" type="file" accept=".csv,.xlsx,.xls" style="display: none;" />
 
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+              <label for="dsFile" class="btn2 btn-sm"
+                style="cursor: pointer; margin: 0; height: 40px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;"
+                data-i18n="btnBrowse">Procurar...</label>
+
+              <span id="fileNameDisplay" class="muted"
+                style="flex: 1; height: 40px; display: flex; align-items: center; padding: 0 12px; border: 1px solid var(--panel-border); border-radius: var(--radius-sm); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; box-sizing: border-box;"
+                data-i18n="noFileChosen">Nenhum arquivo selecionado.</span>
+            </div>
+          </div>
           <div class="field" style="grid-column: 1 / -1;">
             <div class="btn-row">
-              <span class="muted" style="margin-right:auto;">
+              <span class="muted" style="margin-right:auto;" data-i18n-html="hintUpload">
                 Dica: a coluna padrão é <b>valor</b> (você pode trocar em “Coluna”).
               </span>
-              <button class="btn" id="btnUpload">Salvar base de dados</button>
+              <button class="btn" id="btnUpload" data-i18n="btnUpload">Salvar base de dados</button>
             </div>
           </div>
         </div>
@@ -50,29 +72,29 @@
         <div class="msg error" id="errBox" role="alert" aria-live="polite">
           <div class="msg-row">
             <div id="errText"></div>
-            <button class="btn2 btn-sm" id="btnCloseErr" type="button">Fechar</button>
+            <button class="btn2 btn-sm" id="btnCloseErr" type="button" data-i18n="btnClose">Fechar</button>
           </div>
         </div>
 
         <div class="msg success" id="okBox" aria-live="polite">
           <div class="msg-row">
             <div id="okText"></div>
-            <button class="btn2 btn-sm" id="btnCloseOk" type="button">Fechar</button>
+            <button class="btn2 btn-sm" id="btnCloseOk" type="button" data-i18n="btnClose">Fechar</button>
           </div>
         </div>
       </section>
 
       <section class="panel">
-        <h2>Configuração da Análise</h2>
-
+        <h2 data-i18n="secConfig">Configuração da Análise</h2>
         <div class="form-grid">
+
           <div class="field">
-            <label for="method">Método</label>
+            <label for="method" data-i18n="labelMethod">Método</label>
             <select id="method">
-              <option value="sigma">Sigma (média ± k·desvio)</option>
-              <option value="zscore">Z-score (|z| > k)</option>
-              <option value="iqr">IQR (Q1/Q3 ± k·IQR)</option>
-              <option value="mad">MAD (mediana ± k·MAD)</option>
+              <option value="sigma" data-i18n="optSigma">Sigma (média ± k·desvio)</option>
+              <option value="zscore" data-i18n="optZscore">Z-score (|z| > k)</option>
+              <option value="iqr" data-i18n="optIqr">IQR (Q1/Q3 ± k·IQR)</option>
+              <option value="mad" data-i18n="optMad">MAD (mediana ± k·MAD)</option>
             </select>
           </div>
 
@@ -82,53 +104,52 @@
           </div>
 
           <div class="field">
-            <label for="direction">Direção</label>
+            <label for="direction" data-i18n="labelDirection">Direção</label>
             <select id="direction">
-              <option value="upper">Somente acima</option>
-              <option value="lower">Somente abaixo</option>
-              <option value="both">Ambos</option>
+              <option value="upper" data-i18n="dirUpper">Somente acima</option>
+              <option value="lower" data-i18n="dirLower">Somente abaixo</option>
+              <option value="both" data-i18n="dirBoth">Ambos</option>
             </select>
           </div>
 
           <div class="field">
-            <label for="column">Coluna</label>
-            <input id="column" type="text" value="valor" />
+            <label for="column" data-i18n="labelColumn">Coluna</label>
+            <input id="column" type="text" value="valor" data-i18n-val="defColumn" />
           </div>
 
           <div class="field">
-            <label for="streaming">Leitura em Lotes (CSV)</label>
+            <label for="streaming" data-i18n="labelStreaming" data-i18n="labelStreaming">Leitura em Lotes (CSV)</label>
             <select id="streaming">
-              <option value="false">Não</option>
-              <option value="true">Sim (média/desvio)</option>
+              <option value="false" data-i18n="optNo">Não</option>
+              <option value="true" data-i18n="optYesBatch">Sim (média/desvio)</option>
             </select>
           </div>
-
           <div class="field">
-            <label for="maxSus">Máx. suspeitas</label>
+            <label for="maxSus" data-i18n="labelMaxSus">Máx. suspeitas</label>
             <input id="maxSus" type="number" value="500" min="1" max="5000" />
           </div>
         </div>
 
-        <p class="muted" style="margin: 10px 0 0;">
+        <p class="muted" style="margin: 10px 0 0;" data-i18n-html="hintBatch">
           Leitura em Lotes ajuda em CSV grande, mas só vale para <b>Sigma</b> e <b>Z-score</b>.
         </p>
       </section>
     </div>
 
     <section class="panel" style="margin-top:16px;">
-      <h2> Base de dados </h2>
+      <h2 data-i18n="secDatabase"> Base de dados </h2>
 
       <div class="table-box">
         <table>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Arquivo</th>
-              <th>Tamanho</th>
-              <th>Data de Envio</th>
-              <th>Última análise</th>
-              <th>Ações</th>
+              <th data-i18n="thID">ID</th>
+              <th data-i18n="thName">Nome</th>
+              <th data-i18n="thFile">Arquivo</th>
+              <th data-i18n="thSize">Tamanho</th>
+              <th data-i18n="thDate">Data de Envio</th>
+              <th data-i18n="thLast">Última análise</th>
+              <th data-i18n="thActions">Ações</th>
             </tr>
           </thead>
           <tbody id="dsTbody"></tbody>
@@ -137,24 +158,25 @@
     </section>
 
     <section class="panel" style="margin-top:16px;">
-      <h2>Resultado da Análise</h2>
-      <div class="muted" id="resultHint">Selecione <b>Analisar</b> em alguma base de dados.</div>
+      <h2 data-i18n="secResult">Resultado da Análise</h2>
+      <div class="muted" id="resultHint" data-i18n-html="resultHint">Selecione <b>Analisar</b> em alguma base de dados.
+      </div>
 
       <div class="cards">
         <div class="card">
-          <h3>Método</h3>
+          <h3 data-i18n="cardMethod">Método</h3>
           <div class="value" id="rMethod">--</div>
         </div>
         <div class="card">
-          <h3>Estatísticas</h3>
+          <h3 data-i18n="cardStats">Estatísticas</h3>
           <div class="value" id="rStats">--</div>
         </div>
         <div class="card">
-          <h3>Limites</h3>
+          <h3 data-i18n="cardLimits">Limites</h3>
           <div class="value" id="rThresh">--</div>
         </div>
         <div class="card">
-          <h3>Suspeitas</h3>
+          <h3 data-i18n="cardSuspects">Suspeitas</h3>
           <div class="value alert"><span id="rCount">--</span></div>
         </div>
       </div>
@@ -172,18 +194,18 @@
     </section>
 
     <section id="sessao-grafico" class="panel" style="margin-top:16px; display: none;">
-      <h2>Gráfico de Tendência e Anomalias</h2>
-      <p class="muted">Os pontos a vermelho destacam os valores considerados suspeitos.</p>
+      <h2 data-i18n="secChart">Gráfico de Tendência e Anomalias</h2>
+      <p class="muted" data-i18n="chartSubtitle">Os pontos a vermelho destacam os valores considerados suspeitos.</p>
 
       <div style="display: flex; gap: 16px; margin-bottom: 12px; align-items: center; font-size: 13px;">
         <div style="display: flex; align-items: center; gap: 6px;">
           <span style="display: inline-block; width: 16px; height: 3px; background: var(--brand);"></span>
-          Transações Normais
+          <span data-i18n="legendNormal">Transações Normais</span>
         </div>
         <div style="display: flex; align-items: center; gap: 6px;">
           <span
             style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
-          Transações Suspeitas
+          <span data-i18n="legendSuspect">Transações Suspeitas</span>
         </div>
       </div>
       <div style="position: relative; height: 400px; width: 100%; overflow-x: auto; overflow-y: hidden;">
@@ -202,17 +224,19 @@
           style="position: absolute; top: 12px; right: 16px; background: transparent; border: none; color: var(--muted); font-size: 24px; cursor: pointer; padding: 0; line-height: 1; transition: color 0.2s;"
           onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">&times;</button>
 
-        <h2 style="margin-top: 0; font-size: 18px; color: var(--brand);">Análise Concluída! 🚀</h2>
+        <h2 style="margin-top: 0; font-size: 18px; color: var(--brand);" data-i18n="modalTitle">Análise Concluída! 🚀
+        </h2>
         <p id="modalMsg" style="color: var(--text); font-size: 14px; margin-bottom: 24px; line-height: 1.5;"></p>
         <div style="display: flex; gap: 12px; justify-content: center;">
-          <button class="btn2" id="btnNaoGrafico" style="flex: 1;">Apenas Tabela</button>
-          <button class="btn" id="btnSimGrafico" style="flex: 1;">📉 Ver Gráfico</button>
+          <button class="btn2" id="btnNaoGrafico" style="flex: 1;" data-i18n="btnTableOnly">Apenas Tabela</button>
+          <button class="btn" id="btnSimGrafico" style="flex: 1;" data-i18n="btnViewChart">📉 Ver Gráfico</button>
         </div>
       </div>
     </div>
 
     <footer>
-      Detecção de Transações Suspeitas - By Débora Ribeiro, Esdras Vitor, Tiago Lucas
+      <span data-i18n="footerText">Detecção de Transações Suspeitas - Por</span> Débora Ribeiro, Esdras Vitor, Tiago
+      Lucas
     </footer>
   </div>
   <script src="/static/script.js"></script>

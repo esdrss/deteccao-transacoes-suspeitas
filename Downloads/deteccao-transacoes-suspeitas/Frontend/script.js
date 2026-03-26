@@ -1,6 +1,5 @@
 const $ = (id) => document.getElementById(id);
 const formatarMoeda = (valor) => {
-    // Se não for número (ex: nomes, datas), retorna como está
     if (valor === null || valor === undefined || isNaN(valor)) return valor;
 
     return new Intl.NumberFormat('pt-BR', {
@@ -8,6 +7,346 @@ const formatarMoeda = (valor) => {
         currency: 'BRL'
     }).format(valor);
 };
+
+const i18n = {
+    pt: {
+        title: "Detecção de Transações Suspeitas",
+        themeLight: "Tema Claro",
+        themeDark: "Tema Escuro",
+        dirUpper: "Somente acima",
+        dirLower: "Somente abaixo",
+        dirBoth: "Ambos",
+        lower: "inferior",
+        upper: "superior",
+        secUpload: "Enviar Arquivo",
+        secConfig: "Configuração da Análise",
+        secDatabase: "Base de dados",
+        secResult: "Resultado da Análise",
+        secChart: "Gráfico de Tendência e Anomalias",
+        labelName: "Nome da base de dados (opcional)",
+        labelFile: "Arquivo (.csv, .xlsx, .xls)",
+        btnUpload: "Salvar base de dados",
+        labelMethod: "Método",
+        labelDirection: "Direção",
+        labelColumn: "Coluna",
+        labelStreaming: "Leitura em Lotes (CSV)",
+        labelMaxSus: "Máx. suspeitas",
+        placeholderName: "Ex.: Semana 02 - Pagamentos",
+        hintUpload: "Dica: a coluna padrão é <b>valor</b> (você pode trocar em “Coluna”).",
+        hintBatch: "Leitura em Lotes ajuda em CSV grande, mas só vale para <b>Sigma</b> e <b>Z-score</b>.",
+        resultHint: "Selecione <b>Analisar</b> em alguma base de dados.",
+        chartSubtitle: "Os pontos a vermelho destacam os valores considerados suspeitos.",
+        legendNormal: "Transações Normais",
+        legendSuspect: "Transações Suspeitas",
+        modalTitle: "Análise Concluída! 🚀",
+        btnTableOnly: "Apenas Tabela",
+        btnViewChart: "📉 Ver Gráfico",
+        chartAll: "Todos os Valores",
+        chartNormalSingle: "Transação Normal",
+        chartSuspectSingle: "Transação Suspeita",
+        modalMsg1: "Foram encontradas ",
+        modalMsg2: " transações suspeitas.<br><br>Deseja visualizar o gráfico de tendência agora?",
+        thID: "ID",
+        thName: "Nome",
+        thFile: "Arquivo",
+        thSize: "Tamanho",
+        thDate: "Data de Envio",
+        thLast: "Última análise",
+        thActions: "Ações",
+        analysisIn: "Análise em",
+        columnLabel: "coluna",
+        "data": "data",
+        "id transação": "id transação",
+        "nome": "nome",
+        "categoria": "categoria",
+        "estabelecimento": "estabelecimento",
+        "método de pagamento": "método de pagamento",
+        "cidade/uf": "cidade/uf",
+        "valor": "valor",
+        btnClose: "Fechar",
+        btnAnalyze: "Analisar",
+        btnReview: "Rever análise",
+        btnRename: "Renomear",
+        btnReplace: "Substituir",
+        btnDelete: "Excluir",
+        tblLoading: "Carregando...",
+        tblEmpty: "Nenhum dataset salvo ainda.",
+        tblNoAnalysis: "sem análise",
+        tblSuspects: "suspeitas",
+        cardMethod: "Método",
+        cardStats: "Estatísticas",
+        cardLimits: "Limites",
+        cardSuspects: "Suspeitas",
+        stat_mean: "média",
+        stat_std: "desvio",
+        stat_median: "mediana",
+        btnBrowse: "Procurar...",
+        noFileChosen: "Nenhum arquivo selecionado.",
+        optNo: "Não",
+        optYesBatch: "Sim (média/desvio)",
+        defColumn: "valor",
+        footerText: "Detecção de Transações Suspeitas - Por",
+        errMissingCol: "A planilha precisa ter uma coluna chamada '{col}'.",
+        errFewData: "Poucos dados na coluna '{col}' para calcular estatísticas.",
+        errFewDataStd: "Poucos dados na coluna para calcular desvio padrão.",
+        promptRename: "Novo nome do dataset:",
+        confirmDelete: "Excluir dataset {id}?",
+        msgRenamed: "Nome atualizado.",
+        msgReplaced: "Arquivo substituído. (Resultado anterior limpo)",
+        msgDeleted: "Dataset excluído.",
+        msgSaved: "Dataset salvo:",
+        errNoFile: "Escolha um arquivo.",
+        optSigma: "Sigma (média ± k·desvio)",
+        optZscore: "Z-score (|z| > k)",
+        optIqr: "IQR (Q1/Q3 ± k·IQR)",
+        optMad: "MAD (mediana ± k·MAD)",
+    },
+    en: {
+        title: "Suspicious Transaction Detection",
+        themeLight: "Light Theme",
+        themeDark: "Dark Theme",
+        dirUpper: "Only above",
+        dirLower: "Only below",
+        dirBoth: "Both",
+        lower: "lower",
+        upper: "upper",
+        secUpload: "Upload File",
+        secConfig: "Analysis Configuration",
+        secDatabase: "Database",
+        secResult: "Analysis Result",
+        secChart: "Trend and Anomalies Chart",
+        labelName: "Dataset name (optional)",
+        labelFile: "File (.csv, .xlsx, .xls)",
+        btnUpload: "Save dataset",
+        labelMethod: "Method",
+        labelDirection: "Direction",
+        labelColumn: "Column",
+        labelStreaming: "Batch Reading (CSV)",
+        labelMaxSus: "Max. suspects",
+        placeholderName: "e.g., Week 02 - Payments",
+        hintUpload: "Tip: the default column is <b>value</b> (you can change it under “Column”).",
+        hintBatch: "Batch Reading helps with large CSVs, but only applies to <b>Sigma</b> and <b>Z-score</b>.",
+        resultHint: "Select <b>Analyze</b> in a database.",
+        chartSubtitle: "Red dots highlight values considered suspicious.",
+        legendNormal: "Normal Transactions",
+        legendSuspect: "Suspicious Transactions",
+        modalTitle: "Analysis Completed! 🚀",
+        btnTableOnly: "Table Only",
+        btnViewChart: "📉 View Chart",
+        chartAll: "All Values",
+        chartNormalSingle: "Normal Transaction",
+        chartSuspectSingle: "Suspicious Transaction",
+        modalMsg1: "Found ",
+        modalMsg2: " suspicious transactions.<br><br>Would you like to view the trend chart now?",
+        thID: "ID",
+        thName: "Name",
+        thFile: "File",
+        thSize: "Size",
+        thDate: "Upload Date",
+        thLast: "Last Analysis",
+        thActions: "Actions",
+        analysisIn: "Analyzed on",
+        columnLabel: "column",
+        "data": "date",
+        "id transação": "transaction id",
+        "nome": "name",
+        "categoria": "category",
+        "estabelecimento": "establishment",
+        "método de pagamento": "payment method",
+        "cidade/uf": "city/state",
+        "valor": "value",
+        btnClose: "Close",
+        btnAnalyze: "Analyze",
+        btnReview: "Review analysis",
+        btnRename: "Rename",
+        btnReplace: "Replace",
+        btnDelete: "Delete",
+        tblLoading: "Loading...",
+        tblEmpty: "No dataset saved yet.",
+        tblNoAnalysis: "no analysis",
+        tblSuspects: "suspects",
+        cardMethod: "Method",
+        cardStats: "Statistics",
+        cardLimits: "Limits",
+        cardSuspects: "Suspects",
+        stat_mean: "mean",
+        stat_std: "std",
+        stat_median: "median",
+        btnBrowse: "Browse...",
+        noFileChosen: "No file chosen.",
+        optNo: "No",
+        optYesBatch: "Yes (mean/std)",
+        defColumn: "value",
+        footerText: "Suspicious Transaction Detection - By",
+        errMissingCol: "The spreadsheet must have a column named '{col}'.",
+        errFewData: "Not enough data in column '{col}' to calculate statistics.",
+        errFewDataStd: "Not enough data to calculate standard deviation.",
+        promptRename: "New dataset name:",
+        confirmDelete: "Delete dataset {id}?",
+        msgRenamed: "Name updated.",
+        msgReplaced: "File replaced. (Previous result cleared)",
+        msgDeleted: "Dataset deleted.",
+        msgSaved: "Dataset saved:",
+        errNoFile: "Please choose a file.",
+        optSigma: "Sigma (mean ± k·std)",
+        optZscore: "Z-score (|z| > k)",
+        optIqr: "IQR (Q1/Q3 ± k·IQR)",
+        optMad: "MAD (median ± k·MAD)",
+    },
+    es: {
+        title: "Detección de Transacciones Sospechosas",
+        themeLight: "Tema Claro",
+        themeDark: "Tema Oscuro",
+        dirUpper: "Solo por encima",
+        dirLower: "Solo por debajo",
+        dirBoth: "Ambos",
+        lower: "inferior",
+        upper: "superior",
+        secUpload: "Subir Archivo",
+        secConfig: "Configuración de Análisis",
+        secDatabase: "Base de datos",
+        secResult: "Resultado del Análisis",
+        secChart: "Gráfico de Tendencia y Anomalías",
+        labelName: "Nombre de la base de datos (opcional)",
+        labelFile: "Archivo (.csv, .xlsx, .xls)",
+        btnUpload: "Guardar base de datos",
+        labelMethod: "Método",
+        labelDirection: "Dirección",
+        labelColumn: "Columna",
+        labelStreaming: "Lectura en Lotes (CSV)",
+        labelMaxSus: "Máx. sospechas",
+        placeholderName: "Ej.: Semana 02 - Pagos",
+        hintUpload: "Consejo: la columna predeterminada es <b>valor</b> (puedes cambiarla en “Columna”).",
+        hintBatch: "La Lectura por Lotes ayuda con CSV grandes, pero solo funciona para <b>Sigma</b> y <b>Z-score</b>.",
+        resultHint: "Selecciona <b>Analizar</b> en alguna base de datos.",
+        chartSubtitle: "Los puntos en rojo resaltan los valores considerados sospechosos.",
+        legendNormal: "Transacciones Normales",
+        legendSuspect: "Transacciones Sospechosas",
+        modalTitle: "¡Análisis Completado! 🚀",
+        btnTableOnly: "Solo Tabla",
+        btnViewChart: "📉 Ver Gráfico",
+        chartAll: "Todos los Valores",
+        chartNormalSingle: "Transacción Normal",
+        chartSuspectSingle: "Transacción Sospechosa",
+        modalMsg1: "Se encontraron ",
+        modalMsg2: " transacciones sospechosas.<br><br>¿Deseas ver el gráfico de tendencia ahora?",
+        thID: "ID",
+        thName: "Nombre",
+        thFile: "Archivo",
+        thSize: "Tamaño",
+        thDate: "Fecha de Subida",
+        thLast: "Última Análisis",
+        thActions: "Acciones",
+        analysisIn: "Analizado el",
+        columnLabel: "columna",
+        "data": "fecha",
+        "id transação": "id transacción",
+        "nome": "nombre",
+        "categoria": "categoría",
+        "estabelecimento": "establecimiento",
+        "método de pagamento": "método de pago",
+        "cidade/uf": "ciudad/estado",
+        "valor": "valor",
+        btnClose: "Cerrar",
+        btnAnalyze: "Analizar",
+        btnReview: "Revisar análisis",
+        btnRename: "Renombrar",
+        btnReplace: "Reemplazar",
+        btnDelete: "Eliminar",
+        tblLoading: "Cargando...",
+        tblEmpty: "Ningún conjunto de datos guardado aún.",
+        tblNoAnalysis: "sin análisis",
+        tblSuspects: "sospechosas",
+        cardMethod: "Método",
+        cardStats: "Estadísticas",
+        cardLimits: "Límites",
+        cardSuspects: "Sospechas",
+        stat_mean: "media",
+        stat_std: "desv",
+        stat_median: "mediana",
+        btnBrowse: "Examinar...",
+        noFileChosen: "Ningún archivo seleccionado.",
+        optNo: "No",
+        optYesBatch: "Sí (media/desv)",
+        defColumn: "valor",
+        footerText: "Detección de Transacciones Sospechosas - Por",
+        errMissingCol: "La hoja de cálculo debe tener una columna llamada '{col}'.",
+        errFewData: "No hay suficientes datos en la columna '{col}' para calcular estadísticas.",
+        errFewDataStd: "No hay suficientes datos para calcular la desviación estándar.",
+        promptRename: "Nuevo nombre del dataset:",
+        confirmDelete: "¿Eliminar dataset {id}?",
+        msgRenamed: "Nombre actualizado.",
+        msgReplaced: "Archivo reemplazado. (Resultado anterior borrado)",
+        msgDeleted: "Dataset eliminado.",
+        msgSaved: "Dataset guardado:",
+        errNoFile: "Por favor, elige un archivo.",
+        optSigma: "Sigma (media ± k·desv)",
+        optZscore: "Z-score (|z| > k)",
+        optIqr: "IQR (Q1/Q3 ± k·IQR)",
+        optMad: "MAD (mediana ± k·MAD)",
+    }
+};
+
+let currentLang = localStorage.getItem('app-lang') || 'pt';
+
+function updateUI() {
+    const dict = i18n[currentLang] || i18n['pt'];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+            el.textContent = dict[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) {
+            el.placeholder = dict[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (dict[key]) {
+            el.innerHTML = dict[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-val]').forEach(el => {
+        const key = el.getAttribute('data-i18n-val');
+        if (dict[key]) {
+            const valAtual = el.value.toLowerCase();
+            if (valAtual === 'valor' || valAtual === 'value') {
+                el.value = dict[key];
+            }
+        }
+    });
+}
+
+const langSelectElem = $('langSelect');
+if (langSelectElem) {
+    langSelectElem.value = currentLang;
+
+    langSelectElem.addEventListener('change', async (e) => {
+        currentLang = e.target.value;
+        localStorage.setItem('app-lang', currentLang);
+        updateUI();
+
+        await refreshDatasets();
+
+        const dict = i18n[currentLang] || i18n['pt'];
+        $('resultHint').innerHTML = dict.resultHint;
+        $('susHead').innerHTML = '';
+        $('susBody').innerHTML = '';
+        $('rMethod').textContent = '--';
+        $('rStats').textContent = '--';
+        $('rThresh').textContent = '--';
+        $('rCount').textContent = '--';
+        $('sessao-grafico').style.display = 'none';
+    });
+}
+
+updateUI();
 
 function showErr(msg) {
     const box = $('errBox');
@@ -55,21 +394,29 @@ async function apiJson(url, opts = {}) {
     const res = await fetch(url, opts);
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-        const msg = data.detail || data.erro || ('Erro HTTP ' + res.status);
+        let msg = data.detail || data.erro || ('Erro HTTP ' + res.status);
+        const dict = i18n[currentLang] || i18n['pt'];
+        if (msg.startsWith('ERR_MISSING_COLUMN|')) {
+            msg = dict.errMissingCol.replace('{col}', msg.split('|')[1]);
+        } else if (msg.startsWith('ERR_FEW_DATA|')) {
+            msg = dict.errFewData.replace('{col}', msg.split('|')[1]);
+        } else if (msg === 'ERR_FEW_DATA_STD') {
+            msg = dict.errFewDataStd;
+        }
+
         throw new Error(msg);
     }
     return data;
 }
-
 async function refreshDatasets() {
     const tbody = $('dsTbody');
-
-    tbody.innerHTML = `<tr><td colspan="7">Carregando...</td></tr>`;
+    const dict = i18n[currentLang] || i18n['pt'];
+    tbody.innerHTML = `<tr><td colspan="7">${dict.tblLoading}</td></tr>`;
 
     try {
         const list = await apiJson('/datasets');
         if (list.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7">Nenhum dataset salvo ainda.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="7">${dict.tblEmpty}</td></tr>`;
             return;
         }
 
@@ -77,10 +424,10 @@ async function refreshDatasets() {
         for (const ds of list) {
             const last = ds.last_analysis_at
                 ? pill(
-                    `${(ds.last_analysis_method || '--').toUpperCase()} · ${ds.last_suspeitas_count ?? '--'} suspeitas`,
+                    `${(ds.last_analysis_method || '--').toUpperCase()} · ${ds.last_suspeitas_count ?? '--'} ${dict.tblSuspects}`,
                     (ds.last_suspeitas_count || 0) > 0 ? 'pill-warn' : 'pill-ok'
                 )
-                : pill('sem análise', 'pill-info');
+                : pill(dict.tblNoAnalysis, 'pill-info');
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -92,11 +439,11 @@ async function refreshDatasets() {
             <td>${last}</td>
             <td>
               <div class="actions">
-                <button class="btn btn-sm" data-act="analyze" data-id="${ds.id}">Analisar</button>
-                <button class="btn2 btn-sm" data-act="view" data-id="${ds.id}">Rever análise</button>
-                <button class="btn2 btn-sm" data-act="rename" data-id="${ds.id}">Renomear</button>
-                <button class="btn2 btn-sm" data-act="replace" data-id="${ds.id}">Substituir</button>
-                <button class="danger btn-sm" data-act="delete" data-id="${ds.id}">Excluir</button>
+                <button class="btn btn-sm" data-act="analyze" data-id="${ds.id}">${dict.btnAnalyze}</button>
+                <button class="btn2 btn-sm" data-act="view" data-id="${ds.id}">${dict.btnReview}</button>
+                <button class="btn2 btn-sm" data-act="rename" data-id="${ds.id}">${dict.btnRename}</button>
+                <button class="btn2 btn-sm" data-act="replace" data-id="${ds.id}">${dict.btnReplace}</button>
+                <button class="danger btn-sm" data-act="delete" data-id="${ds.id}">${dict.btnDelete}</button>
                 <input type="file" accept=".csv,.xlsx,.xls" style="display:none" data-file="${ds.id}" />
               </div>
             </td>
@@ -121,6 +468,7 @@ let meuGrafico = null;
 
 function desenharGrafico(chartData) {
     const sessaoGrafico = $('sessao-grafico');
+    const dict = i18n[currentLang] || i18n['pt'];
 
     if (!chartData) {
         sessaoGrafico.style.display = 'none';
@@ -136,21 +484,14 @@ function desenharGrafico(chartData) {
         meuGrafico.destroy();
     }
 
-    // Lemos as variáveis de cor diretamente do CSS do body
     const rootStyles = getComputedStyle(document.body);
     const corTexto = rootStyles.getPropertyValue('--muted').trim() || '#94a3b8';
     const corLinha = rootStyles.getPropertyValue('--brand').trim() || '#6366f1';
-
-    // Grade super suave dependendo do tema (claro ou escuro)
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     const corGrid = isLight ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.04)';
-
-    // --- A MÁGICA DO GRADIENTE AQUI ---
-    // Criamos um degradê vertical (do topo y=0 até a base y=350)
     const gradientArea = ctx.createLinearGradient(0, 0, 0, 350);
-    // O '33' e o '00' no final são valores hexadecimais de opacidade (Alpha)
-    gradientArea.addColorStop(0, corLinha + '33'); // ~20% de opacidade no topo (suave)
-    gradientArea.addColorStop(1, corLinha + '00'); // 0% de opacidade (totalmente transparente) na base
+    gradientArea.addColorStop(0, corLinha + '33');
+    gradientArea.addColorStop(1, corLinha + '00');
 
     meuGrafico = new Chart(ctx, {
         type: 'line',
@@ -158,17 +499,17 @@ function desenharGrafico(chartData) {
             labels: chartData.labels,
             datasets: [
                 {
-                    label: 'Todos os Valores',
+                    label: dict.chartAll,
                     data: chartData.values,
                     borderColor: corLinha,
-                    backgroundColor: gradientArea, // Aplicamos o gradiente
-                    fill: true,                    // Obrigatório para o preenchimento aparecer!
+                    backgroundColor: gradientArea,
+                    fill: true,
                     borderWidth: 1.5,
                     pointRadius: 2,
                     tension: 0.1
                 },
                 {
-                    label: 'Transações Suspeitas',
+                    label: dict.legendSuspect,
                     data: chartData.suspeitos,
                     backgroundColor: '#ef4444',
                     borderColor: '#ef4444',
@@ -188,11 +529,8 @@ function desenharGrafico(chartData) {
             },
             plugins: {
                 legend: { display: false },
-                // Formata a caixinha ao passar o mouse (Tooltip)
                 tooltip: {
-                    // Filtro para não exibir os dois juntos nas suspeitas
                     filter: function (tooltipItem, index, tooltipItems) {
-                        // Se houver normal e suspeito no mesmo ponto, oculta o normal (dataset 0)
                         if (tooltipItems.length > 1 && tooltipItem.datasetIndex === 0) {
                             return false;
                         }
@@ -202,11 +540,10 @@ function desenharGrafico(chartData) {
                         label: function (context) {
                             let label = context.dataset.label || '';
 
-                            // Substitui o texto "Todos os Valores" no tooltip
-                            if (label === 'Todos os Valores') {
-                                label = 'Transação Normal';
-                            } else if (label === 'Transações Suspeitas') {
-                                label = 'Transação Suspeita';
+                            if (label === dict.chartAll) {
+                                label = dict.chartNormalSingle;
+                            } else if (label === dict.legendSuspect) {
+                                label = dict.chartSuspectSingle;
                             }
 
                             if (label) {
@@ -241,19 +578,25 @@ function desenharGrafico(chartData) {
 }
 
 function renderResult(result, isReview = false) {
-    $('resultHint').textContent =
-        `Análise em ${new Date(result.analysis_at).toLocaleString('pt-BR')} · coluna: ${result.column}`;
+    const dictMsg = i18n[currentLang] || i18n['pt'];
+    const localeStr = currentLang === 'en' ? 'en-US' : currentLang === 'es' ? 'es-ES' : 'pt-BR';
+    const dataFormatada = new Date(result.analysis_at).toLocaleString(localeStr);
+
+    const colTraduzida = dictMsg[result.column.toLowerCase()] || result.column;
+    $('resultHint').textContent = `${dictMsg.analysisIn} ${dataFormatada} · ${dictMsg.columnLabel}: ${colTraduzida}`;
 
     $('rMethod').textContent = String(result.method || '--').toUpperCase();
     $('rCount').textContent = result.quantidade_suspeitas ?? '--';
-
     const statsPairs = Object.entries(result.stats || {})
-        .map(([k, v]) => `${k}=${v}`)
+        .map(([k, v]) => {
+            const nomeEstatistica = dictMsg['stat_' + k] || k;
+            return `${nomeEstatistica}=${v}`;
+        })
         .join(' · ');
     $('rStats').textContent = statsPairs || '--';
-
     const th = result.thresholds || {};
-    $('rThresh').textContent = `lower=${th.lower ?? '--'} · upper=${th.upper ?? '--'}`;
+    const dict = i18n[currentLang] || i18n['pt'];
+    $('rThresh').textContent = `${dict.lower}=${th.lower ?? '--'} · ${dict.upper}=${th.upper ?? '--'}`;
 
     const head = $('susHead');
     const body = $('susBody');
@@ -268,7 +611,7 @@ function renderResult(result, isReview = false) {
         const cols = Object.keys(rows[0]);
         for (const c of cols) {
             const thEl = document.createElement('th');
-            thEl.textContent = c;
+            thEl.textContent = dictMsg[c.toLowerCase()] || c;
             head.appendChild(thEl);
         }
         const colAlvo = result.column;
@@ -307,7 +650,8 @@ function renderResult(result, isReview = false) {
                     const btnNao = $('btnNaoGrafico');
                     const btnX = $('btnFecharX');
 
-                    msg.innerHTML = `Foram encontradas <b style="color: var(--danger); font-size: 16px;">${result.quantidade_suspeitas}</b> transações suspeitas.<br><br>Deseja visualizar o gráfico de tendência agora?`;
+                    const dictMsg = i18n[currentLang] || i18n['pt'];
+                    msg.innerHTML = `${dictMsg.modalMsg1}<b style="color: var(--danger); font-size: 16px;">${result.quantidade_suspeitas}</b>${dictMsg.modalMsg2}`;
 
                     modal.style.display = 'flex';
 
@@ -328,25 +672,27 @@ function renderResult(result, isReview = false) {
 }
 
 async function handleUpload() {
-    clearMsg();
-
+    const dict = i18n[currentLang] || i18n['pt'];
     const file = $('dsFile').files[0];
-    if (!file) { showErr('Escolha um arquivo.'); return; }
+    if (!file) {
+        showErr(dict.errNoFile);
+        return;
+    }
 
     const btn = $('btnUpload');
     btn.disabled = true;
-
     const fd = new FormData();
     fd.append('arquivo', file);
-
     const name = $('dsName').value.trim();
     if (name) fd.append('name', name);
 
     try {
         const ds = await apiJson('/datasets', { method: 'POST', body: fd });
-        showOk(`Dataset salvo: ${ds.id}`);
+        showOk(`${dict.msgSaved} ${ds.id}`);
         $('dsName').value = '';
         $('dsFile').value = '';
+        $('fileNameDisplay').textContent = dict.noFileChosen;
+        $('fileNameDisplay').setAttribute('data-i18n', 'noFileChosen');
         await refreshDatasets();
     } catch (e) {
         showErr(e.message);
@@ -383,7 +729,8 @@ async function viewLast(id) {
 }
 
 async function renameDataset(id) {
-    const newName = prompt('Novo nome do dataset:');
+    const dict = i18n[currentLang] || i18n['pt'];
+    const newName = prompt(dict.promptRename);
     if (!newName) return;
 
     clearMsg();
@@ -392,7 +739,7 @@ async function renameDataset(id) {
         fd.append('name', newName);
         await apiJson(`/datasets/${id}`, { method: 'PUT', body: fd });
         await refreshDatasets();
-        showOk('Nome atualizado.');
+        showOk(dict.msgRenamed);
     } catch (e) {
         showErr(e.message);
     }
@@ -405,13 +752,14 @@ async function replaceFile(id) {
         const file = input.files[0];
         if (!file) return;
 
+        const dict = i18n[currentLang] || i18n['pt'];
         clearMsg();
         try {
             const fd = new FormData();
             fd.append('arquivo', file);
             await apiJson(`/datasets/${id}`, { method: 'PUT', body: fd });
             await refreshDatasets();
-            showOk('Arquivo substituído. (Resultado anterior foi limpo)');
+            showOk(dict.msgReplaced);
         } catch (e) {
             showErr(e.message);
         } finally {
@@ -421,13 +769,14 @@ async function replaceFile(id) {
 }
 
 async function deleteDataset(id) {
-    if (!confirm(`Excluir dataset ${id}?`)) return;
+    const dict = i18n[currentLang] || i18n['pt'];
+    if (!confirm(dict.confirmDelete.replace('{id}', id))) return;
 
     clearMsg();
     try {
         await apiJson(`/datasets/${id}`, { method: 'DELETE' });
         await refreshDatasets();
-        showOk('Dataset excluído.');
+        showOk(dict.msgDeleted);
     } catch (e) {
         showErr(e.message);
     }
@@ -463,10 +812,13 @@ const themeIcon = $('themeIcon');
 const htmlEl = document.documentElement;
 
 const savedTheme = localStorage.getItem('app-theme') || 'dark';
+
+// Verifica o tema inicial e ajusta a etiqueta de tradução
 if (savedTheme === 'light') {
     htmlEl.setAttribute('data-theme', 'light');
-    themeIcon.textContent = '🌙';
-    btnThemeToggle.innerHTML = '<span id="themeIcon">🌙</span> Tema Escuro';
+    $('themeIcon').textContent = '🌙';
+    $('themeText').setAttribute('data-i18n', 'themeDark');
+    updateUI(); // Chama a tradução para ajustar o texto na hora
 }
 
 btnThemeToggle.addEventListener('click', () => {
@@ -474,17 +826,30 @@ btnThemeToggle.addEventListener('click', () => {
     if (currentTheme === 'light') {
         htmlEl.removeAttribute('data-theme');
         localStorage.setItem('app-theme', 'dark');
-        btnThemeToggle.innerHTML = '<span id="themeIcon">☀️</span> Tema Claro';
+        $('themeIcon').textContent = '☀️';
+        $('themeText').setAttribute('data-i18n', 'themeLight');
     } else {
         htmlEl.setAttribute('data-theme', 'light');
         localStorage.setItem('app-theme', 'light');
-        btnThemeToggle.innerHTML = '<span id="themeIcon">🌙</span> Tema Escuro';
+        $('themeIcon').textContent = '🌙';
+        $('themeText').setAttribute('data-i18n', 'themeDark');
     }
+
+    updateUI();
 
     if (meuGrafico) {
         meuGrafico.update();
     }
 });
-
+$('dsFile').addEventListener('change', (e) => {
+    const display = $('fileNameDisplay');
+    if (e.target.files.length > 0) {
+        display.textContent = e.target.files[0].name;
+        display.removeAttribute('data-i18n');
+    } else {
+        display.setAttribute('data-i18n', 'noFileChosen');
+        updateUI();
+    }
+});
 // init
 refreshDatasets().catch(e => showErr(e.message));

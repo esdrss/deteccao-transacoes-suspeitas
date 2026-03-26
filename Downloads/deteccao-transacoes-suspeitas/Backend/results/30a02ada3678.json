@@ -1,16 +1,16 @@
 {
-  "method": "mad",
+  "method": "sigma",
   "direction": "upper",
   "column": "valor",
   "stats": {
-    "median": 961.9,
-    "mad": 454.33
+    "mean": 1450.33,
+    "std": 1715.49
   },
   "thresholds": {
     "lower": null,
-    "upper": 3319.43
+    "upper": 6596.8
   },
-  "quantidade_suspeitas": 5,
+  "quantidade_suspeitas": 3,
   "suspeitas": [
     {
       "data": "2025-12-16T02:19:54.557",
@@ -33,16 +33,6 @@
       "valor": 6653.73
     },
     {
-      "data": "2026-01-10T02:19:54.557",
-      "id transação": "TRX26020054",
-      "nome": "Ana Santos",
-      "categoria": "Supermercado",
-      "estabelecimento": "Bompreço",
-      "método de pagamento": "Cartão de Crédito",
-      "cidade/uf": "Paulista/PE",
-      "valor": 5235.13
-    },
-    {
       "data": "2026-01-12T02:19:54.557",
       "id transação": "TRX26020055",
       "nome": "Yasmin Martins",
@@ -51,21 +41,11 @@
       "método de pagamento": "Cartão de Débito",
       "cidade/uf": "Recife/PE",
       "valor": 7477.11
-    },
-    {
-      "data": "2026-02-05T02:19:54.557",
-      "id transação": "TRX26020051",
-      "nome": "Paulo Martins",
-      "categoria": "Transporte",
-      "estabelecimento": "99",
-      "método de pagamento": "Cartão de Crédito",
-      "cidade/uf": "Cabo de Santo Agostinho/PE",
-      "valor": 6063.68
     }
   ],
   "truncated": false,
-  "analysis_ms": 68,
-  "analysis_at": "2026-03-11T02:33:57.818942+00:00",
+  "analysis_ms": 37,
+  "analysis_at": "2026-03-19T03:10:33.046132+00:00",
   "n_valid": 55,
   "chart_data": {
     "labels": [
@@ -206,7 +186,7 @@
       null,
       null,
       null,
-      5235.13,
+      null,
       7477.11,
       null,
       null,
@@ -222,7 +202,7 @@
       null,
       null,
       null,
-      6063.68,
+      null,
       null,
       null,
       null,

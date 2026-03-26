@@ -7,13 +7,13 @@
       "stored_filename": "30a02ada3678.xlsx",
       "size_bytes": 12266,
       "uploaded_at": "2026-03-07T00:36:39.571983+00:00",
-      "updated_at": "2026-03-11T02:33:57.832943+00:00",
-      "last_analysis_at": "2026-03-11T02:33:57.818942+00:00",
-      "last_analysis_method": "mad",
-      "last_suspeitas_count": 5,
+      "updated_at": "2026-03-19T03:10:33.057940+00:00",
+      "last_analysis_at": "2026-03-19T03:10:33.046132+00:00",
+      "last_analysis_method": "sigma",
+      "last_suspeitas_count": 3,
       "last_thresholds": {
         "lower": null,
-        "upper": 3319.43
+        "upper": 6596.8
       },
       "notes": {}
     }
